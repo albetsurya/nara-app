@@ -139,10 +139,13 @@ export function HomeView() {
         </div>
         {entries.length === 0 ? (
           <Link href="/journal/new" className="rowcard p-3.5 text-left shadow-sm">
-            <span className="flex items-center gap-3">
-              <span className="grid h-11 w-11 shrink-0 place-items-center"><span className="svg-asset-wrapper" data-asset="note"><NoteMint size={44} /></span></span>
-              <span><span className="block font-display text-[15px] font-bold text-pine">{t.home.emptyTitle}</span><span className="block font-sans text-[13px] text-stone-500">{t.home.emptySub}</span></span>
-            </span>
+            <div className="flex flex-col gap-2 pt-2">
+              <Pip pose="default" size={32} motion="breathe" />
+              <span className="flex items-center gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center"><span className="svg-asset-wrapper" data-asset="note"><NoteMint size={44} /></span></span>
+                <span><span className="block font-display text-[15px] font-bold text-pine">{t.home.emptyTitle}</span><span className="block font-sans text-[13px] text-stone-500">{t.home.emptySub}</span></span>
+              </span>
+            </div>
           </Link>
         ) : (
           <ul className="flex flex-col gap-2.5">
