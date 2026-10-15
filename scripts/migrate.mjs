@@ -11,6 +11,7 @@
  * File migrasi dibuat idempoten, jadi aman dijalankan ulang.
  */
 import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { lookup } from "node:dns/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import pg from "pg";
@@ -32,7 +33,7 @@ loadEnv();
 
 const { Client } = pg;
 
-function connectionConfig() {
+async function connectionConfig() {
   if (process.env.DATABASE_URL) return { connectionString: process.env.DATABASE_URL };
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
   const ref = url.match(/^https:\/\/([a-z0-9]+)\.supabase\.co/)?.[1];
@@ -45,8 +46,17 @@ function connectionConfig() {
         "lalu tambahkan baris ini ke .env.local:\n  SUPABASE_DB_PASSWORD=<password-anda>"
     );
   }
+  // Mesin build Vercel hanya punya IPv4, sedangkan hostname db.*.supabase.co
+  // juga resolve ke IPv6 (ENETUNREACH). Paksa resolve IPv4 secara eksplisit.
+  const hostname = `db.${ref}.supabase.co`;
+  let host = hostname;
+  try {
+    host = (await lookup(hostname, { family: 4 })).address;
+  } catch {
+    // Gagal resolve IPv4: biarkan pg coba hostname aslinya.
+  }
   return {
-    host: `db.${ref}.supabase.co`,
+    host,
     port: 5432,
     user: "postgres",
     password,
@@ -63,7 +73,8 @@ if (files.length === 0) {
 }
 
 try {
-  const client = new Client(connectionConfig());  await client.connect();
+  const client = new Client(await connectionConfig());
+  await client.connect();
   console.log(`Terhubung. Menjalankan ${files.length} migrasi...`);
   for (const f of files) {
     const sql = readFileSync(join(dir, f), "utf8");
