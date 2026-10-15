@@ -15,6 +15,9 @@ function Base({ size = 120, vb, label, className, children, ...rest }: AssetProp
   );
 }
 
+/* Helper to apply dark mode fix class to specific assets */
+const darkFixClass = "svg-dark-fix";
+
 /* id clipPath statis per aset; aman dipakai berulang karena definisinya identik. */
 
 export function PipDefault(props: AssetProps) {

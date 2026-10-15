@@ -129,7 +129,7 @@ export function HomeView() {
         {entries.length === 0 ? (
           <Link href="/journal/new" className="rowcard p-3.5 text-left shadow-sm">
             <span className="flex items-center gap-3">
-              <span className="grid h-11 w-11 shrink-0 place-items-center"><NoteMint size={44} /></span>
+              <span className="grid h-11 w-11 shrink-0 place-items-center"><span className="svg-asset-wrapper" data-asset="note"><NoteMint size={44} /></span></span>
               <span><span className="block font-display text-[15px] font-bold text-pine">{t.home.emptyTitle}</span><span className="block font-sans text-[13px] text-stone-500">{t.home.emptySub}</span></span>
             </span>
           </Link>
@@ -138,13 +138,13 @@ export function HomeView() {
             {entries.slice(0, 3).map((e) => {
               const Face = MOODS.find((m) => m.id === e.mood)?.Face ?? MOODS[2].Face;
               return (
-                <li key={e.id} className="rowcard p-3.5 shadow-sm">
+                <Link key={e.id} href={`/journal/${e.id}`} prefetch className="rowcard p-3.5 shadow-sm">
                   <span className="min-w-0 flex-1">
                     <span className="line-clamp-2 block text-left font-sans text-sm font-medium leading-relaxed text-pine">{e.content}</span>
                     <time dateTime={e.created_at} className="mt-0.5 block font-sans text-[11px] text-stone-400">{new Date(e.created_at).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}</time>
                   </span>
                   <span className="grid h-11 w-11 shrink-0 place-items-center"><Face size={44} /></span>
-                </li>
+                </Link>
               );
             })}
           </ul>

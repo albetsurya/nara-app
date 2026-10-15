@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Pip } from "@/components/pip/Pip";
@@ -36,7 +37,7 @@ export default function StampsPage() {
 
       {total === 0 && !isPlaceholderData ? (
         <section className="flex flex-col items-center rounded-3xl border border-stone-200/50 bg-white px-4 py-6 text-center shadow-sm">
-          <span className="grid h-20 w-20 place-items-center opacity-40 grayscale"><StampArt size={72} /></span>
+          <span className="grid h-20 w-20 place-items-center opacity-40 grayscale"><span className="svg-asset-wrapper" data-asset="stamp"><StampArt size={72} /></span></span>
           <h2 className="mt-2 font-display text-[16px] font-bold text-pine">{t.stamps.emptyTitle}</h2>
           <p className="mt-1 max-w-[240px] font-sans text-[13px] leading-relaxed text-stone-500">{t.stamps.emptySub}</p>
           <Pip pose="peek" size={96} motion="none" className="mt-2" />
@@ -47,26 +48,28 @@ export default function StampsPage() {
             {rows.map((s, index) => {
               const m = stampText(t, s.stamp_type);
               return (
-                <motion.li
-                  key={s.id}
-                  initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 22, delay: index * 0.08 }}
-                  whileHover={{ scale: 1.03, rotate: 1 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="flex cursor-pointer flex-col items-center rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm"
-                >
+                <Link href={`/stamps/${s.id}`} prefetch>
+                  <motion.li
+                    key={s.id}
+                    initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 350, damping: 22, delay: index * 0.08 }}
+                    whileHover={{ scale: 1.03, rotate: 1 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="flex cursor-pointer flex-col items-center rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm"
+                  >
                   <motion.span
                     animate={{ rotate: [-2, 2, -2] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                     className="grid h-16 w-16 place-items-center"
                   >
-                    <StampArt size={60} />
+                    <span className="svg-asset-wrapper" data-asset="stamp"><StampArt size={60} /></span>
                   </motion.span>
                   <p className="mt-2 font-display text-[13.5px] font-bold leading-snug on-tint">{m.title}</p>
                   <p className="mt-0.5 font-sans text-[11.5px] leading-snug on-tint-soft">{m.blurb}</p>
                   <time className="mt-1.5 font-display text-[10px] font-bold tracking-[0.12em] on-tint-soft">{new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</time>
-                </motion.li>
+                  </motion.li>
+                </Link>
               );
             })}
           </ul>

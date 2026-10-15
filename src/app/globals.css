@@ -62,6 +62,13 @@
 /* Google button: always white + dark text, in both themes (brand convention). */
 .dark .btn-google, .dark .btn-google:hover { background-color: #ffffff; color: #1f293b; border-color: #e4e4e7; }
 
+/* SVG asset dark mode: assets with hardcoded light backgrounds get a wrapper fix */
+.svg-asset-wrapper { display: inline-block; }
+.dark .svg-asset-wrapper[data-asset="stamp"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
+.dark .svg-asset-wrapper[data-asset="note"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
+.dark .svg-asset-wrapper[data-asset="paperclip"] { background: #202939; border-radius: 0.5rem; padding: 0.375rem; }
+.dark .svg-asset-wrapper[data-asset="heart"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
+
 /* Safe-area helpers for installed PWA on notched phones */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
 .pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }

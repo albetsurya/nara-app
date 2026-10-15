@@ -15,8 +15,9 @@ const en = {
     retry: "Try again",
     close: "Close",
     next: "Next",
+    min: "min",
   },
-  nav: { home: "Home", stamps: "Stamps", write: "Write a new entry", pip: "Pip" },
+  nav: { home: "Home", stamps: "Stamps", write: "Write a new entry", pip: "Pip", profile: "Profile" },
   time: { morning: "Good morning", afternoon: "Good afternoon", evening: "Good evening" },
   home: {
     title: "Small time, big feelings",
@@ -164,6 +165,7 @@ const en = {
     pageOf: "Page {a} of {b}",
     back: "Back",
     next: "Next",
+    earnedAt: "Earned on {date}",
   },
   stampsMeta: {
     first_entry: { title: "Your first stamp", blurb: "You wrote your first entry." },
@@ -178,6 +180,13 @@ const en = {
     placeholder: "Tell {name} something...",
     typing: "{name} is typing",
     error: "Could not reach {name}. Try again.",
+  },
+  profile: {
+    guest: "Guest",
+    sub: "Your companion, your rhythm, your space.",
+    danger: "Danger zone",
+    signOut: "Sign out",
+    version: "Nara v0.1.0",
   },
   offline: {
     msg: "You are offline. New notes will sync later.",
@@ -203,8 +212,9 @@ const id: Dict = {
     retry: "Coba lagi",
     close: "Tutup",
     next: "Lanjut",
+    min: "mnt",
   },
-  nav: { home: "Beranda", stamps: "Stempel", write: "Tulis catatan baru", pip: "Pip" },
+  nav: { home: "Beranda", stamps: "Stempel", write: "Tulis catatan baru", pip: "Pip", profile: "Profil" },
   time: { morning: "Selamat pagi", afternoon: "Selamat siang", evening: "Selamat malam" },
   home: {
     title: "Waktu singkat, rasa yang besar",
@@ -352,6 +362,7 @@ const id: Dict = {
     pageOf: "Halaman {a} dari {b}",
     back: "Kembali",
     next: "Lanjut",
+    earnedAt: "Diperoleh pada {date}",
   },
   stampsMeta: {
     first_entry: { title: "Stempel pertamamu", blurb: "Kamu menulis catatan pertamamu." },
@@ -366,6 +377,13 @@ const id: Dict = {
     placeholder: "Ceritakan sesuatu ke {name}...",
     typing: "{name} sedang mengetik",
     error: "Tidak bisa menghubungi {name}. Coba lagi.",
+  },
+  profile: {
+    guest: "Tamu",
+    sub: "Temanmu, ritmemu, ruangmu.",
+    danger: "Zona bahaya",
+    signOut: "Keluar",
+    version: "Nara v0.1.0",
   },
   offline: {
     msg: "Kamu sedang offline. Catatan baru akan tersinkron nanti.",

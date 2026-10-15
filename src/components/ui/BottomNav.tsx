@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faPlus, faStamp, faComments } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faPlus, faStamp, faComments, faUser } from "@fortawesome/free-solid-svg-icons";
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, fetchProfile, fetchRecentJournals, keys } from "@/lib/queries";
 import { useLang } from "@/lib/i18n";
@@ -131,8 +131,9 @@ export function BottomNav() {
 
   return (
     <nav aria-label="Main" className="fixed bottom-0 left-1/2 z-20 w-full max-w-md -translate-x-1/2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-      <div className="grid h-[68px] grid-cols-[1fr_auto_1fr_1fr] items-center rounded-[28px] border border-stone-200/70 bg-white/95 px-2 shadow-float backdrop-blur">
+      <div className="grid h-[68px] grid-cols-[1fr_1fr_auto_1fr_1fr] items-center rounded-[28px] border border-stone-200/70 bg-white/95 px-2 shadow-float backdrop-blur">
         <Tab href="/home" label={t.nav.home} icon={faHouse} active={path.startsWith("/home")} pending={pendingHref === "/home"} onNavigate={setPendingHref} />
+        <Tab href="/stamps" label={t.nav.stamps} icon={faStamp} active={path.startsWith("/stamps")} pending={pendingHref === "/stamps"} onNavigate={setPendingHref} />
         <div className="flex w-[64px] items-center justify-center">
           <Link
             href="/journal/new"
@@ -153,8 +154,8 @@ export function BottomNav() {
             <FontAwesomeIcon icon={faPlus} className="h-[20px] w-[20px] leading-none" />
           </Link>
         </div>
-        <Tab href="/stamps" label={t.nav.stamps} icon={faStamp} active={path.startsWith("/stamps")} pending={pendingHref === "/stamps"} onNavigate={setPendingHref} />
         <Tab href="/chat" label={t.nav.pip} icon={faComments} active={path.startsWith("/chat")} pending={pendingHref === "/chat"} onNavigate={setPendingHref} />
+        <Tab href="/profile" label={t.nav.profile} icon={faUser} active={path.startsWith("/profile")} pending={pendingHref === "/profile"} onNavigate={setPendingHref} />
       </div>
     </nav>
   );

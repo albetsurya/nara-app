@@ -131,7 +131,7 @@ export default function Onboarding() {
 
                   <div className="relative rotate-6 rounded-2xl border border-stone-200/60 bg-white p-3.5 pt-5 shadow-md">
                     <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <Paperclip size={26} />
+                      <span className="svg-asset-wrapper" data-asset="paperclip"><Paperclip size={26} /></span>
                     </span>
                     <p className="text-center font-display text-[13px] font-bold leading-snug text-stone-700">Sent that</p>
                     <p className="text-center font-display text-[13px] font-medium text-stone-500">message.</p>
@@ -139,7 +139,7 @@ export default function Onboarding() {
 
                   <div className="relative -rotate-3 rounded-2xl border border-indigo-100 bg-[#EBE7F7] p-3.5 pt-5 shadow-md">
                     <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <Paperclip size={26} />
+                      <span className="svg-asset-wrapper" data-asset="paperclip"><Paperclip size={26} /></span>
                     </span>
                     <p className="text-center font-display text-[13px] font-semibold leading-snug text-indigo-950">something for fun.</p>
                   </div>
