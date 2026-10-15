@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import { Pip } from "@/components/pip/Pip";
 import { Stamp as StampArt } from "@/components/pip/PipAssets";
 import { createClient } from "@/lib/supabase/client";
@@ -41,15 +42,36 @@ export default function StampsPage() {
       ) : (
         <section aria-label="Stamp collection" className={isPlaceholderData ? "opacity-60 transition" : "transition"}>
           <ul className="grid grid-cols-2 gap-2.5">
-            {rows.map((s) => {
+            {rows.map((s, index) => {
               const m = stampMeta(s.stamp_type);
               return (
-                <li key={s.id} className="flex flex-col items-center rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm">
-                  <span className="grid h-16 w-16 place-items-center"><StampArt size={60} /></span>
+                <motion.li
+                  key={s.id}
+                  initial={{ opacity: 0, scale: 0.8, rotate: -2 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 350,
+                    damping: 22,
+                    delay: index * 0.08,
+                  }}
+                  whileHover={{ scale: 1.03, rotate: 1 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="flex flex-col items-center rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm cursor-pointer"
+                >
+                  <motion.span
+                    animate={{ rotate: [-2, 2, -2] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                    className="grid h-16 w-16 place-items-center"
+                  >
+                    <StampArt size={60} />
+                  </motion.span>
                   <p className="mt-2 font-display text-[13.5px] font-bold leading-snug text-pine">{m.title}</p>
                   <p className="mt-0.5 font-sans text-[11.5px] leading-snug text-stone-500">{m.blurb}</p>
-                  <time className="mt-1.5 font-display text-[10px] font-bold tracking-[0.12em] text-stone-400">{new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</time>
-                </li>
+                  <time className="mt-1.5 font-display text-[10px] font-bold tracking-[0.12em] text-stone-400">
+                    {new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                  </time>
+                </motion.li>
               );
             })}
           </ul>

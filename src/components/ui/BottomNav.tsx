@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -67,13 +68,15 @@ function Tab({
       onClick={() => onNavigate(href)}
       className="flex h-full w-full flex-col items-center justify-center gap-[3px]"
     >
-      <span
+      <motion.span
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.85 }}
         className={`grid h-[30px] w-[52px] place-items-center rounded-full transition-colors ${
-          active ? "bg-pine text-[#FFF9F0]" : pending ? "bg-pine-soft text-pine" : "text-stone-400"
+          active ? "bg-pine text-[#FFF9F0] shadow-md" : pending ? "bg-pine-soft text-pine" : "text-stone-400"
         } ${pending && !active ? "animate-pulse" : ""}`}
       >
         <FontAwesomeIcon icon={icon} className="h-[17px] w-[17px] leading-none" />
-      </span>
+      </motion.span>
       <span className={`font-display text-[10.5px] leading-none ${active ? "font-bold text-pine" : "font-semibold text-stone-400"}`}>
         {label}
       </span>

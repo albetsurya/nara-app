@@ -42,10 +42,23 @@ export function Pip({ pose = "default", size = 120, className, motion: mode = "b
       className={className}
       style={{ width: size, transformOrigin: "50% 100%" }}
       animate={
-        still ? undefined : mode === "bob" ? { y: [0, -7, 0] } : { scaleY: [1, 1.035, 1], scaleX: [1, 0.985, 1] }
+        still
+          ? undefined
+          : mode === "bob"
+          ? { y: [0, -6, 0], rotate: [-1, 1, -1] }
+          : { scaleY: [1, 1.04, 1], scaleX: [1, 0.97, 1] }
       }
-      transition={still ? undefined : { duration: mode === "bob" ? 3.4 : 4.2, repeat: Infinity, ease: "easeInOut" }}
-      whileTap={still ? undefined : { scaleX: 1.08, scaleY: 0.9 }}
+      transition={
+        still
+          ? undefined
+          : {
+              duration: mode === "bob" ? 3.2 : 3.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }
+      }
+      whileHover={still ? undefined : { scale: 1.05, transition: { duration: 0.2 } }}
+      whileTap={still ? undefined : { scale: 0.92, rotate: -2, transition: { duration: 0.1 } }}
     >
       <Face size={size} />
     </motion.div>
