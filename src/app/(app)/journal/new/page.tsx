@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faBullseye } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faBullseye, faExpand, faCompress } from "@fortawesome/free-solid-svg-icons";
 import { MoodPicker } from "@/components/journal/MoodPicker";
 import { Pip } from "@/components/pip/Pip";
 import { Dew } from "@/components/pip/PipAssets";
@@ -13,7 +13,8 @@ import { useSaveJournal, useRecentJournals } from "@/hooks/useJournal";
 import type { Mood } from "@/lib/moods";
 import { DAILY_GOAL_SECONDS, secondsWrittenToday } from "@/lib/queries";
 import { useLang } from "@/lib/i18n";
-import { buzzSuccess } from "@/lib/haptics";
+import { setFocusMode } from "@/lib/focusMode";
+import { buzzLight, buzzSuccess } from "@/lib/haptics";
 import { TemplateSelector } from "@/components/journal/TemplateSelector";
 import { DailyPromptBanner } from "@/components/journal/DailyPrompt";
 import { RichEditor, ENTRY_MAX } from "@/components/journal/RichEditor";
@@ -33,7 +34,14 @@ export default function NewJournal() {
   const [seconds, setSeconds] = useState(0);
   const [done, setDone] = useState<null | { queued: boolean }>(null);
   const [selectedTemplate, setSelectedTemplate] = useState("free");
+  const [focus, setFocus] = useState(false);
   const lastKey = useRef(0);
+
+  // Immersive writing: hide page chrome + bottom nav, widen the editor.
+  useEffect(() => {
+    setFocusMode(focus);
+    return () => setFocusMode(false);
+  }, [focus]);
 
   // Session time + today's written time feed one shared goal progress.
   const already = secondsWrittenToday(entries);
@@ -97,7 +105,7 @@ export default function NewJournal() {
   const canSave = plain.trim().length > 0 && plain.length <= MAX && !save.isPending && !done;
 
   return (
-    <main className="flex flex-col gap-4 py-1">
+    <main className={`flex flex-col gap-4 py-1${focus ? " focus-writing" : ""}`}>
       <header className="sticky-top flex items-center justify-between">
         <Link href="/home" aria-label={t.common.back} className="grid h-9 w-9 place-items-center rounded-full border border-stone-200/70 bg-white shadow-sm transition active:scale-95"><FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5 text-stone-600" /></Link>
         <div className="flex flex-col items-center gap-1">
@@ -112,23 +120,38 @@ export default function NewJournal() {
             />
           </div>
         </div>
-        <span className="w-9" />
+        <button
+          onClick={() => {
+            buzzLight();
+            setFocus((f) => !f);
+          }}
+          aria-label={focus ? t.journal.focusExit : t.journal.focusEnter}
+          aria-pressed={focus}
+          title={focus ? t.journal.focusExit : t.journal.focusEnter}
+          className="grid h-9 w-9 place-items-center rounded-full border border-stone-200/70 bg-white shadow-sm transition active:scale-95"
+        >
+          <FontAwesomeIcon icon={focus ? faCompress : faExpand} className="h-3.5 w-3.5 text-stone-600" />
+        </button>
       </header>
 
-      <div className="flex items-center gap-2.5 rounded-2xl border border-stone-200/70 bg-white px-3 py-2 shadow-sm" aria-live="polite">
-        <Pip pose={pipPose} size={40} motion={reached ? "breathe" : "none"} />
-        <div className="min-w-0">
-          <p className="font-sans text-[13px] font-medium leading-snug text-pine">{coach}</p>
-          {coachSub && <p className="font-sans text-[11px] leading-snug text-stone-400">{coachSub}</p>}
+      {!focus && (
+        <div className="flex items-center gap-2.5 rounded-2xl border border-stone-200/70 bg-white px-3 py-2 shadow-sm" aria-live="polite">
+          <Pip pose={pipPose} size={40} motion={reached ? "breathe" : "none"} />
+          <div className="min-w-0">
+            <p className="font-sans text-[13px] font-medium leading-snug text-pine">{coach}</p>
+            {coachSub && <p className="font-sans text-[11px] leading-snug text-stone-400">{coachSub}</p>}
+          </div>
         </div>
-      </div>
+      )}
 
-      <DailyPromptBanner />
+      {!focus && <DailyPromptBanner />}
 
-      <div>
-        <h1 className="h-display">{t.journal.title}</h1>
-        <p className="subcopy">{t.journal.sub}</p>
-      </div>
+      {!focus && (
+        <div>
+          <h1 className="h-display">{t.journal.title}</h1>
+          <p className="subcopy">{t.journal.sub}</p>
+        </div>
+      )}
 
       <div className="relative rounded-3xl border border-stone-200/70 bg-white p-4 pt-7 shadow-sm">
         <span className="absolute -top-6 left-4 grid h-14 w-14 place-items-center">
@@ -139,10 +162,12 @@ export default function NewJournal() {
           <Link href="/home" className="rounded-full bg-stone-100 px-3 py-1 font-display text-[11px] font-bold text-stone-500">{t.common.skip}</Link>
         </div>
 
-        <TemplateSelector
-          initialTemplate={selectedTemplate}
-          onSelect={handleTemplateSelect}
-        />
+        {!focus && (
+          <TemplateSelector
+            initialTemplate={selectedTemplate}
+            onSelect={handleTemplateSelect}
+          />
+        )}
 
         <label htmlFor="entry" className="sr-only">{t.journal.yourNote}</label>
         <RichEditor

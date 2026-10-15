@@ -9,6 +9,7 @@ import { faHouse, faPlus, faStamp, faComments, faUser } from "@fortawesome/free-
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, fetchProfile, fetchRecentJournals, keys } from "@/lib/queries";
 import { useLang } from "@/lib/i18n";
+import { useFocusMode } from "@/lib/focusMode";
 import { buzzLight } from "@/lib/haptics";
 
 /** Warm the RSC payload and the TanStack cache before the user taps. */
@@ -128,6 +129,10 @@ export function BottomNav() {
   const warmNew = useWarmRoute("/journal/new");
   const isNew = path.startsWith("/journal/new");
   const pendingNew = pendingHref === "/journal/new";
+  const focus = useFocusMode();
+
+  // Immersive writing: the page chrome goes quiet, so does the nav.
+  if (focus) return null;
 
   return (
     <nav aria-label="Main" className="fixed bottom-0 left-1/2 z-20 w-full max-w-md -translate-x-1/2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">

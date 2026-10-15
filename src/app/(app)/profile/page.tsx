@@ -7,6 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { LocaleSwitch } from "@/components/ui/LocaleSwitch";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { PreferencesCard } from "@/components/home/PreferencesCard";
+import { MoodTrend } from "@/components/profile/MoodTrend";
 import { useProfile } from "@/hooks/useJournal";
 import { useSignOut } from "@/hooks/useSignOut";
 import { useLang } from "@/lib/i18n";
@@ -73,6 +74,8 @@ export default function ProfilePage() {
       </section>
 
       <PreferencesCard username={profile?.username ?? null} onSaveName={saveName} savingName={savingName} />
+
+      <MoodTrend />
 
       <section className="rounded-3xl border border-stone-200/50 bg-white p-4 shadow-sm">
         <h2 className="mb-3 font-display text-[15px] font-bold text-pine">{t.profile.danger}</h2>
