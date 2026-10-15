@@ -13,40 +13,24 @@ import {
   Shelly,
   Paperclip,
 } from "@/components/pip/PipAssets";
+import { LocaleSwitch } from "@/components/ui/LocaleSwitch";
+import { useLang } from "@/lib/i18n";
+import { buzzLight, buzzSuccess } from "@/lib/haptics";
 
 const INTENTS = [
-  { id: "clearer-head", title: "A clearer head", Char: Dew, tint: "bg-[#E3F1FA]" },
-  { id: "everyday-habits", title: "Everyday habits", Char: Moss, tint: "bg-[#E4F2E6]" },
-  { id: "new-idea", title: "A new idea", Char: Sandy, tint: "bg-[#FCEEDF]" },
-  { id: "next-chapter", title: "My next chapter", Char: Shelly, tint: "bg-[#ECE7F8]" },
-];
+  { id: "clearer-head", Char: Dew, tint: "bg-[#E3F1FA]" },
+  { id: "everyday-habits", Char: Moss, tint: "bg-[#E4F2E6]" },
+  { id: "new-idea", Char: Sandy, tint: "bg-[#FCEEDF]" },
+  { id: "next-chapter", Char: Shelly, tint: "bg-[#ECE7F8]" },
+] as const;
 
+// Canonical names match pip-assets.zip (Sandy, Dew, Moss). Localized copy
+// comes from the i18n dictionary by index.
 const COMPANIONS = [
-  {
-    name: "Sandy",
-    tag: "PLAYFUL",
-    quote: "Brain full of tabs? Let's close a few, one tiny thought at a time.",
-    vibe: "Light and playful, keeps things easy.",
-    bg: "bg-[#FBE9E0]",
-    Char: Sandy,
-  },
-  {
-    name: "Dew",
-    tag: "GENTLE",
-    quote: "Take your time. Every feeling has a place here.",
-    vibe: "Warm and quiet, listens first.",
-    bg: "bg-[#EAF3EB]",
-    Char: Dew,
-  },
-  {
-    name: "Moss",
-    tag: "STEADY",
-    quote: "One day, one step, one quiet breath.",
-    vibe: "Calm and steady, grounds you.",
-    bg: "bg-[#E6EFF8]",
-    Char: Moss,
-  },
-];
+  { name: "Sandy", bg: "bg-[#FBE9E0]", Char: Sandy },
+  { name: "Dew", bg: "bg-[#EAF3EB]", Char: Dew },
+  { name: "Moss", bg: "bg-[#E6EFF8]", Char: Moss },
+] as const;
 
 const slideAnim = {
   initial: { opacity: 0, x: 20 },
@@ -57,6 +41,7 @@ const slideAnim = {
 
 export default function Onboarding() {
   const router = useRouter();
+  const { t } = useLang();
   const [step, setStep] = useState(0);
 
   const [selectedIntents, setSelectedIntents] = useState<string[]>(["clearer-head"]);
@@ -65,7 +50,13 @@ export default function Onboarding() {
   const [reminderActive, setReminderActive] = useState(true);
   const [firstThought, setFirstThought] = useState("");
 
+  const go = (n: number) => {
+    buzzLight();
+    setStep(n);
+  };
+
   const toggleIntent = (id: string) => {
+    buzzLight();
     setSelectedIntents((prev) =>
       prev.includes(id)
         ? prev.length > 1
@@ -78,6 +69,7 @@ export default function Onboarding() {
   };
 
   const handleFinish = () => {
+    buzzSuccess();
     localStorage.setItem(
       "nara:onboarding",
       JSON.stringify({
@@ -90,13 +82,15 @@ export default function Onboarding() {
     router.push("/login");
   };
 
+  const ob = t.onboarding;
+
   return (
     <main className="pt-safe pb-safe mx-auto flex min-h-dvh w-full max-w-md flex-col overflow-y-auto bg-canvas px-5 text-pine select-none">
       <div className="flex h-12 shrink-0 items-center justify-between">
         {step > 0 ? (
           <button
-            onClick={() => setStep(step - 1)}
-            aria-label="Back"
+            onClick={() => go(step - 1)}
+            aria-label={t.common.back}
             className="grid h-9 w-9 place-items-center rounded-full border border-stone-200/70 bg-white shadow-sm transition active:scale-95"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5 text-stone-600" />
@@ -118,7 +112,7 @@ export default function Onboarding() {
           </div>
         )}
 
-        <div className="w-9" />
+        {step === 0 ? <LocaleSwitch /> : <div className="w-9" />}
       </div>
 
       <AnimatePresence mode="wait">
@@ -163,20 +157,20 @@ export default function Onboarding() {
                 </div>
 
                 <div className="px-2 text-center">
-                  <h1 className="h-display">Your thoughts, ideas, and stories.</h1>
-                  <p className="subcopy">All welcome here.</p>
+                  <h1 className="h-display">{ob.welcomeTitle}</h1>
+                  <p className="subcopy">{ob.welcomeSub}</p>
                 </div>
               </div>
             </div>
 
             <div className="flex shrink-0 flex-col items-center gap-2 pb-1 pt-3">
-              <button onClick={() => setStep(1)} className="btn-primary w-full">
-                Get started
+              <button onClick={() => go(1)} className="btn-primary w-full">
+                {ob.start}
               </button>
               <p className="helpercopy">
-                Already have an account?{" "}
+                {ob.haveAccount}{" "}
                 <Link href="/login" className="font-bold text-pine underline underline-offset-2">
-                  Sign in
+                  {ob.signin}
                 </Link>
               </p>
             </div>
@@ -186,11 +180,11 @@ export default function Onboarding() {
         {step === 1 && (
           <motion.div key="step-1" {...slideAnim} className="flex min-h-0 flex-1 flex-col py-1">
             <div className="shrink-0">
-              <h1 className="h-display">What is on your mind?</h1>
-              <p className="subcopy">Pick what feels closest today.</p>
+              <h1 className="h-display">{ob.mindTitle}</h1>
+              <p className="subcopy">{ob.mindSub}</p>
 
               <div className="mt-4 flex flex-col gap-2.5">
-                {INTENTS.map(({ id, title, Char, tint }) => {
+                {INTENTS.map(({ id, Char, tint }) => {
                   const active = selectedIntents.includes(id);
                   return (
                     <button
@@ -205,10 +199,10 @@ export default function Onboarding() {
                     >
                       <span className="min-w-0 flex-1 text-left">
                         <span className="block font-display text-[16px] font-bold leading-snug text-pine">
-                          {title}
+                          {ob.intents[id as keyof typeof ob.intents]}
                         </span>
                         <span className={`mt-1 inline-block rounded-full px-2.5 py-0.5 font-display text-[10.5px] font-bold tracking-wide ${active ? "bg-pine text-[#FFF9F0]" : "bg-stone-100 text-stone-500"}`}>
-                          {active ? "Selected" : "Tap to pick"}
+                          {active ? ob.selected : ob.tapToPick}
                         </span>
                       </span>
                       <span className={`grid h-[76px] w-[76px] shrink-0 place-items-center overflow-hidden rounded-2xl ${tint}`}>
@@ -221,10 +215,10 @@ export default function Onboarding() {
             </div>
 
             <div className="flex shrink-0 flex-col items-center gap-2 pb-1 pt-3">
-              <button onClick={() => setStep(2)} className="btn-primary w-full">
-                Continue
+              <button onClick={() => go(2)} className="btn-primary w-full">
+                {ob.continue}
               </button>
-              <p className="helpercopy">Pick up to three. You can change this later.</p>
+              <p className="helpercopy">{ob.mindHint}</p>
             </div>
           </motion.div>
         )}
@@ -233,41 +227,45 @@ export default function Onboarding() {
           <motion.div key="step-2" {...slideAnim} className="flex min-h-0 flex-1 flex-col py-1">
             <div className="grid min-h-0 flex-1 place-items-center">
               <div className="w-full">
-                <h1 className="h-display">Who matches your vibe?</h1>
-                <p className="subcopy">This buddy will sit with you while you write.</p>
+                <h1 className="h-display">{ob.vibeTitle}</h1>
+                <p className="subcopy">{ob.vibeSub}</p>
 
                 {(() => {
                   const comp = COMPANIONS[companionIdx];
                   const Char = comp.Char;
+                  const copy = ob.companions[companionIdx];
                   return (
                     <div className="mt-3 flex flex-col items-center">
                       <div
                         className={`flex w-full flex-col items-center px-5 pb-5 pt-4 text-center shadow-sm rounded-3xl border border-stone-200/50 ${comp.bg}`}
                       >
-                        <span className="rounded-full border border-stone-700/30 px-3 py-1 font-display text-[10px] font-bold tracking-[0.14em] text-stone-700">
-                          {comp.tag}
+                        <span className="rounded-full border border-stone-700/30 px-3 py-1 font-display text-[10px] font-bold tracking-[0.14em] on-tint-soft">
+                          {copy.tag}
                         </span>
 
                         <span className="grid h-[148px] w-[160px] place-items-center overflow-hidden">
                           <Char size={132} />
                         </span>
 
-                        <p className="max-w-[240px] font-display text-sm font-bold leading-relaxed text-stone-700">
-                          {comp.quote}
+                        <p className="max-w-[240px] font-display text-sm font-bold leading-relaxed on-tint">
+                          {copy.quote}
                         </p>
                       </div>
 
                       <div className="mt-2.5 text-center">
                         <p className="font-display text-lg font-bold text-pine">{comp.name}</p>
-                        <p className="font-sans text-xs text-stone-500">{comp.vibe}</p>
+                        <p className="font-sans text-xs text-stone-500">{copy.vibe}</p>
                       </div>
 
                       <div className="mt-2 flex items-center gap-1.5">
-                        {COMPANIONS.map((_, idx) => (
+                        {COMPANIONS.map((c, idx) => (
                           <button
-                            key={idx}
-                            aria-label={`Choose ${COMPANIONS[idx].name}`}
-                            onClick={() => setCompanionIdx(idx)}
+                            key={c.name}
+                            aria-label={c.name}
+                            onClick={() => {
+                              buzzLight();
+                              setCompanionIdx(idx);
+                            }}
                             className={`h-1.5 rounded-full transition-all ${
                               idx === companionIdx ? "w-5 bg-pine" : "w-1.5 bg-stone-300"
                             }`}
@@ -281,10 +279,10 @@ export default function Onboarding() {
             </div>
 
             <div className="flex shrink-0 flex-col items-center gap-2 pb-1 pt-2">
-              <button onClick={() => setStep(3)} className="btn-primary w-full">
-                That is my companion
+              <button onClick={() => go(3)} className="btn-primary w-full">
+                {ob.companionCta}
               </button>
-              <p className="helpercopy">You can switch buddies anytime.</p>
+              <p className="helpercopy">{ob.vibeHint}</p>
             </div>
           </motion.div>
         )}
@@ -294,8 +292,8 @@ export default function Onboarding() {
             <div className="grid min-h-0 flex-1 place-items-center">
               <div className="w-full">
                 <div className="text-center">
-                  <h1 className="h-display">Small time, big feelings</h1>
-                  <p className="subcopy">A few minutes to check in with yourself.</p>
+                  <h1 className="h-display">{ob.rhythmTitle}</h1>
+                  <p className="subcopy">{ob.rhythmSub}</p>
                 </div>
 
                 <div className="mt-3 flex flex-col items-center">
@@ -314,7 +312,7 @@ export default function Onboarding() {
                         {dailyMinutes}
                       </span>
                       <span className="mt-1 font-display text-[11px] font-bold tracking-[0.14em] text-stone-500">
-                        MIN / DAY
+                        {ob.minDay}
                       </span>
                     </div>
                   </div>
@@ -323,13 +321,16 @@ export default function Onboarding() {
                     {[3, 5, 10].map((m) => (
                       <button
                         key={m}
-                        onClick={() => setDailyMinutes(m)}
+                        onClick={() => {
+                          buzzLight();
+                          setDailyMinutes(m);
+                        }}
                         aria-pressed={dailyMinutes === m}
                         className={`rounded-full px-4 py-1.5 font-display text-xs font-bold transition ${
                           dailyMinutes === m ? "pill-active" : "pill-idle"
                         }`}
                       >
-                        {m} min
+                        {m} {ob.min}
                       </button>
                     ))}
                   </div>
@@ -340,14 +341,17 @@ export default function Onboarding() {
                         <FontAwesomeIcon icon={faBell} className="h-3.5 w-3.5" />
                       </span>
                       <span>
-                        <span className="block font-display text-[13.5px] font-bold text-pine">A little nudge?</span>
-                        <span className="block font-sans text-xs text-stone-500">8:30 PM, your call</span>
+                        <span className="block font-display text-[13.5px] font-bold text-pine">{ob.nudge}</span>
+                        <span className="block font-sans text-xs text-stone-500">{ob.nudgeSub}</span>
                       </span>
                     </div>
                     <button
-                      onClick={() => setReminderActive(!reminderActive)}
+                      onClick={() => {
+                        buzzLight();
+                        setReminderActive(!reminderActive);
+                      }}
                       aria-pressed={reminderActive}
-                      aria-label="Toggle reminder"
+                      aria-label={ob.nudge}
                       className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
                         reminderActive ? "bg-pine" : "bg-stone-300"
                       }`}
@@ -364,11 +368,11 @@ export default function Onboarding() {
             </div>
 
             <div className="flex shrink-0 flex-col items-center gap-2 pb-1 pt-2">
-              <button onClick={() => setStep(4)} className="btn-primary w-full">
-                Set my daily rhythm
+              <button onClick={() => go(4)} className="btn-primary w-full">
+                {ob.setRhythm}
               </button>
-              <button onClick={() => setStep(4)} className="py-1 font-sans text-xs font-medium text-stone-500">
-                Skip for now
+              <button onClick={() => go(4)} className="py-1 font-sans text-xs font-medium text-stone-500">
+                {ob.skipForNow}
               </button>
             </div>
           </motion.div>
@@ -378,8 +382,8 @@ export default function Onboarding() {
           <motion.div key="step-4" {...slideAnim} className="flex min-h-0 flex-1 flex-col py-1">
             <div>
               <div className="text-center">
-                <h1 className="h-display">Let us start with you</h1>
-                <p className="subcopy">There is no right place to start.</p>
+                <h1 className="h-display">{ob.startTitle}</h1>
+                <p className="subcopy">{ob.startSub}</p>
               </div>
 
               <div className="relative mt-8 rounded-3xl border border-stone-200/70 bg-white p-5 pt-6 shadow-sm">
@@ -389,28 +393,28 @@ export default function Onboarding() {
 
                 <div className="flex justify-end">
                   <button
-                    onClick={() => setStep(5)}
+                    onClick={() => go(5)}
                     className="rounded-full bg-stone-100 px-3 py-1 font-display text-[11px] font-bold text-stone-500 hover:bg-stone-200"
                   >
-                    Skip
+                    {t.common.skip}
                   </button>
                 </div>
 
                 <div className="mt-2">
                   <h3 className="font-display text-[15px] font-bold text-pine">
-                    What is on your mind?
+                    {ob.promptTitle}
                   </h3>
                   <p className="mt-0.5 font-sans text-xs leading-relaxed text-stone-500">
-                    An idea, a feeling, or how today went.
+                    {ob.promptSub}
                   </p>
 
                   <div className="mt-3">
-                    <span className="eyebrow">YOUR THOUGHT</span>
+                    <span className="eyebrow">{ob.yourThought}</span>
                     <textarea
                       rows={4}
                       value={firstThought}
                       onChange={(e) => setFirstThought(e.target.value.slice(0, 500))}
-                      placeholder="Write a thought..."
+                      placeholder={ob.thoughtPh}
                       className="mt-1 w-full resize-none border-none bg-transparent p-0 font-sans text-[15px] leading-relaxed text-pine placeholder:font-normal placeholder:text-stone-300 focus:outline-none focus:ring-0"
                     />
                     <div className="text-right font-sans text-[11px] tabular-nums text-stone-400">
@@ -423,13 +427,13 @@ export default function Onboarding() {
 
             <div className="mt-auto flex flex-col items-center gap-2 pb-1 pt-2">
               <button
-                onClick={() => setStep(5)}
+                onClick={() => go(5)}
                 disabled={firstThought.trim().length === 0}
                 className={firstThought.trim().length > 0 ? "btn-primary w-full" : "btn-disabled w-full"}
               >
-                Save my thought
+                {ob.saveThought}
               </button>
-              <p className="helpercopy">Write as much or as little as you want.</p>
+              <p className="helpercopy">{ob.thoughtHint}</p>
             </div>
           </motion.div>
         )}
@@ -438,8 +442,8 @@ export default function Onboarding() {
           <motion.div key="step-5" {...slideAnim} className="flex min-h-0 flex-1 flex-col py-1">
             <div>
               <div className="text-center">
-                <h1 className="h-display">A good start</h1>
-                <p className="subcopy">You turned a thought into a first step.</p>
+                <h1 className="h-display">{ob.doneTitle}</h1>
+                <p className="subcopy">{ob.doneSub}</p>
               </div>
 
               <div className="mt-5 flex flex-col items-center">
@@ -463,9 +467,9 @@ export default function Onboarding() {
                 </div>
 
                 <div className="mt-4 text-center">
-                  <p className="font-display text-[17px] font-bold text-pine">Your first stamp</p>
+                  <p className="font-display text-[17px] font-bold text-pine">{ob.firstStamp}</p>
                   <p className="mx-auto mt-1 max-w-[240px] font-sans text-xs leading-relaxed text-stone-500">
-                    Small moments are worth keeping. Your collection grows as you do.
+                    {ob.firstStampSub}
                   </p>
                 </div>
               </div>
@@ -473,9 +477,9 @@ export default function Onboarding() {
 
             <div className="mt-auto flex flex-col items-center gap-2 pb-1 pt-2">
               <button onClick={handleFinish} className="btn-primary w-full">
-                Open my space
+                {ob.openSpace}
               </button>
-              <p className="helpercopy">Small steps count.</p>
+              <p className="helpercopy">{ob.smallSteps}</p>
             </div>
           </motion.div>
         )}
