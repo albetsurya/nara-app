@@ -4,28 +4,56 @@
 
 @layer base {
   html { -webkit-tap-highlight-color: transparent; }
-  body { @apply bg-canvas font-sans text-[#2F3B54] antialiased; overscroll-behavior-y: none; line-height: 1.6; letter-spacing: 0.01em; }
+  body { @apply bg-canvas font-sans text-[#2F3B54] antialiased dark:bg-[#141A26] dark:text-slate-200; overscroll-behavior-y: none; line-height: 1.6; letter-spacing: 0.01em; }
   :focus-visible { @apply outline-none ring-2 ring-offset-2 ring-offset-canvas ring-pebble-dark; }
 }
 
 @layer components {
-  .h-display { @apply font-display text-[26px] font-bold leading-[1.3] tracking-normal text-[#2F3B54] text-center; }
-  .h-display-sm { @apply font-display text-[22px] font-bold leading-[1.35] tracking-normal text-[#2F3B54] text-center; }
-  .subcopy { @apply mt-2 text-center font-sans text-sm font-normal leading-relaxed text-stone-500; }
-  .helpercopy { @apply text-center font-sans text-xs font-normal leading-relaxed text-stone-400; }
-  .sticker { @apply rounded-3xl bg-white shadow-card border border-stone-200/40; }
-  .rowcard { @apply flex w-full items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 border border-stone-200/70 transition; }
+  .h-display { @apply font-display text-[26px] font-bold leading-[1.3] tracking-normal text-[#2F3B54] text-center dark:text-slate-100; }
+  .h-display-sm { @apply font-display text-[22px] font-bold leading-[1.35] tracking-normal text-[#2F3B54] text-center dark:text-slate-100; }
+  .subcopy { @apply mt-2 text-center font-sans text-sm font-normal leading-relaxed text-stone-500 dark:text-slate-400; }
+  .helpercopy { @apply text-center font-sans text-xs font-normal leading-relaxed text-stone-400 dark:text-slate-500; }
+  .sticker { @apply rounded-3xl bg-white shadow-card border border-stone-200/40 dark:bg-[#202939] dark:border-slate-700/60; }
+  .rowcard { @apply flex w-full items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 border border-stone-200/70 transition dark:bg-[#202939] dark:border-slate-700/60; }
   .btn { @apply inline-flex h-[52px] items-center justify-center gap-2 rounded-full px-6 font-display text-[15px] font-bold tracking-wide transition active:scale-[.98] disabled:pointer-events-none disabled:opacity-40; }
-  .btn-primary { @apply btn bg-pine text-[#FFF9F0] hover:bg-pine-deep shadow-md; }
-  .btn-soft { @apply btn bg-pine-soft text-pine hover:bg-[#DCE4EF] shadow-none; }
-  .btn-mint { @apply btn bg-mint text-pine; }
-  .btn-ghost { @apply btn bg-transparent text-stone-500 hover:text-pine; }
-  .btn-disabled { @apply btn bg-stone-200/70 text-stone-400 cursor-not-allowed shadow-none; }
-  .field { @apply w-full rounded-2xl bg-white px-4 py-3 border border-stone-200/70 font-sans text-[15px] font-normal leading-relaxed focus:border-pine focus:ring-0 placeholder:text-stone-300 placeholder:font-normal; }
-  .eyebrow { @apply font-display text-[10px] font-bold tracking-[0.14em] text-stone-400; }
-  .pill-active { @apply rounded-full bg-pine-soft text-pine border border-[#C9D4E3]; }
-  .pill-idle { @apply rounded-full bg-white text-stone-500 border border-stone-200/70; }
+  .btn-primary { @apply btn bg-pine text-[#FFF9F0] hover:bg-pine-deep shadow-md dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white; }
+  .btn-soft { @apply btn bg-pine-soft text-pine hover:bg-[#DCE4EF] shadow-none dark:bg-slate-700/60 dark:text-slate-100 dark:hover:bg-slate-700; }
+  .btn-mint { @apply btn bg-mint text-pine dark:text-slate-900; }
+  .btn-ghost { @apply btn bg-transparent text-stone-500 hover:text-pine dark:text-slate-400 dark:hover:text-slate-100; }
+  .btn-disabled { @apply btn bg-stone-200/70 text-stone-400 cursor-not-allowed shadow-none dark:bg-slate-700/50 dark:text-slate-500; }
+  .field { @apply w-full rounded-2xl bg-white px-4 py-3 border border-stone-200/70 font-sans text-[15px] font-normal leading-relaxed focus:border-pine focus:ring-0 placeholder:text-stone-300 placeholder:font-normal dark:bg-[#202939] dark:border-slate-700/60 dark:text-slate-100 dark:placeholder:text-slate-600; }
+  .eyebrow { @apply font-display text-[10px] font-bold tracking-[0.14em] text-stone-400 dark:text-slate-500; }
+  .pill-active { @apply rounded-full bg-pine-soft text-pine border border-[#C9D4E3] dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600; }
+  .pill-idle { @apply rounded-full bg-white text-stone-500 border border-stone-200/70 dark:bg-[#202939] dark:text-slate-400 dark:border-slate-700/60; }
+  /* Text sitting on pastel tinted cards: keep dark ink in both themes */
+  .on-tint { @apply text-[#2F3B54]; }
+  .on-tint-soft { @apply text-[#5B6B85]; }
+  /* Sticky page header: stays pinned while content scrolls */
+  .sticky-top { @apply sticky top-0 z-10 -mx-5 bg-canvas/85 px-5 pb-2 pt-2 backdrop-blur dark:bg-[#141A26]/85; }
 }
+
+/* Dark theme: hard-coded light surfaces flip to slate. Pastel tinted cards
+   (bg-[#...]) are intentionally left light for contrast. */
+.dark .bg-white { --tw-bg-opacity: 1; background-color: rgb(32 41 57 / var(--tw-bg-opacity)); }
+.dark .bg-white\/95 { background-color: rgb(32 41 57 / 0.95); }
+.dark .bg-stone-100 { --tw-bg-opacity: 1; background-color: rgb(43 53 71 / var(--tw-bg-opacity)); }
+.dark .bg-stone-200, .dark .bg-stone-300 { --tw-bg-opacity: 1; background-color: rgb(51 65 85 / var(--tw-bg-opacity)); }
+.dark .bg-pine-soft { --tw-bg-opacity: 1; background-color: rgb(43 53 71 / var(--tw-bg-opacity)); }
+.dark .bg-pine { --tw-bg-opacity: 1; background-color: rgb(237 242 247 / var(--tw-bg-opacity)); }
+.dark .text-pine { --tw-text-opacity: 1; color: rgb(236 241 247 / var(--tw-text-opacity)); }
+.dark .text-\[\#FFF9F0\] { --tw-text-opacity: 1; color: rgb(30 41 59 / var(--tw-text-opacity)); }
+.dark .text-stone-900, .dark .text-stone-800, .dark .text-stone-700 { --tw-text-opacity: 1; color: rgb(230 234 240 / var(--tw-text-opacity)); }
+.dark .text-stone-600 { --tw-text-opacity: 1; color: rgb(195 202 214 / var(--tw-text-opacity)); }
+.dark .text-stone-500 { --tw-text-opacity: 1; color: rgb(167 176 191 / var(--tw-text-opacity)); }
+.dark .text-stone-400 { --tw-text-opacity: 1; color: rgb(139 148 165 / var(--tw-text-opacity)); }
+.dark .text-stone-300 { --tw-text-opacity: 1; color: rgb(100 116 139 / var(--tw-text-opacity)); }
+.dark .placeholder\:text-stone-300::placeholder { color: rgb(100 116 139); }
+.dark [class*="border-stone-"] { border-color: rgb(51 65 85); }
+.dark .border-pine { border-color: rgb(148 163 184); }
+.dark .focus\:border-pine:focus { border-color: rgb(148 163 184); }
+.dark .hover\:bg-pine-deep:hover { --tw-bg-opacity: 1; background-color: rgb(255 255 255 / var(--tw-bg-opacity)); }
+.dark .ring-pine { --tw-ring-color: rgb(148 163 184); }
+.dark .shadow-sm, .dark .shadow-md, .dark .shadow-float, .dark .shadow-card { --tw-shadow-color: rgb(0 0 0 / 0.4); }
 
 /* Safe-area helpers for installed PWA on notched phones */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
