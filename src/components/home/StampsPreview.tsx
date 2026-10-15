@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Stamp } from "@/components/pip/PipAssets";
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, keys } from "@/lib/queries";
-import { stampMeta } from "@/lib/stamps";
+import { stampText } from "@/lib/stamps";
 import { useLang } from "@/lib/i18n";
 
 export default function StampsPreview() {
@@ -24,7 +24,7 @@ export default function StampsPreview() {
           {rows.map((s) => (
             <li key={s.id} className="flex w-[76px] flex-col items-center text-center">
               <span className="grid h-16 w-16 place-items-center"><Stamp size={60} /></span>
-              <span className="mt-1 font-display text-[11px] font-bold leading-tight text-pine">{stampMeta(s.stamp_type).title}</span>
+              <span className="mt-1 font-display text-[11px] font-bold leading-tight text-pine">{stampText(t, s.stamp_type).title}</span>
             </li>
           ))}
         </ul>
