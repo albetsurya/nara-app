@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { Pip } from "@/components/pip/Pip";
 import { LocaleSwitch } from "@/components/ui/LocaleSwitch";
@@ -11,14 +11,28 @@ import { buzzLight, buzzSuccess } from "@/lib/haptics";
 
 type Mode = "signin" | "signup";
 
-export default function Login() {
+function GoogleMark() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
+      <path d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z" fill="#4285F4" />
+      <path d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.81.54-1.84.87-3.04.87-2.34 0-4.32-1.58-5.03-3.71H.96v2.34A9 9 0 0 0 9 18z" fill="#34A853" />
+      <path d="M3.97 10.72a5.41 5.41 0 0 1 0-3.44V4.94H.96a9 9 0 0 0 0 8.12l3.01-2.34z" fill="#FBBC05" />
+      <path d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.59C13.46.9 11.42 0 9 0A9 9 0 0 0 .96 4.94l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z" fill="#EA4335" />
+    </svg>
+  );
+}
+
+function LoginForm() {
   const router = useRouter();
+  const params = useSearchParams();
   const { t } = useLang();
   const [mode, setMode] = useState<Mode>("signup");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
-  const [msg, setMsg] = useState<{ kind: "error" | "info"; text: string } | null>(null);
+  const [msg, setMsg] = useState<{ kind: "error" | "info"; text: string } | null>(
+    params.get("error") ? { kind: "error", text: t.login.authFailed } : null
+  );
 
   const redirectTo = () => `${location.origin}/auth/callback`;
 
@@ -36,38 +50,48 @@ export default function Login() {
     else setMsg({ kind: "info", text: t.login.confirm });
   }
 
-  async function handleGoogleLogin() {
-    setBusy(true);
-    buzzLight();
-    await signIn("google", { callbackUrl: "/home" });
+  async function magicLink() {
+    if (!email) return setMsg({ kind: "error", text: t.login.needEmail });
+    setBusy(true); setMsg(null);
+    const { error } = await createClient().auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo() } });
+    setBusy(false);
+    setMsg(error ? { kind: "error", text: error.message } : { kind: "info", text: t.login.sent });
+  }
+
+  async function google() {
+    setBusy(true); setMsg(null);
+    try {
+      // NextAuth handles Google OAuth, then /api/auth/supabase-sync swaps the
+      // Google ID token for a Supabase session (keeps RLS working).
+      await signIn("google", { callbackUrl: "/api/auth/supabase-sync" });
+    } catch {
+      setBusy(false);
+      setMsg({ kind: "error", text: t.login.oauthFailed });
+    }
   }
 
   return (
-    <main className="pb-safe mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 pt-8">
-      <div className="flex justify-end">
-        <LocaleSwitch />
-      </div>
-      <p className="text-center font-display text-xl font-bold text-pine">nara</p>
-      <span className="mx-auto mt-3 grid h-[104px] w-[104px] place-items-center"><Pip pose="wave" size={96} motion="breathe" /></span>
+    <>
       <h1 className="h-display mt-2">{mode === "signup" ? t.login.signupTitle : t.login.signinTitle}</h1>
       <p className="subcopy">{t.login.sub}</p>
-
       <form onSubmit={submit} className="mt-4 flex flex-col gap-2.5">
+        <button type="button" onClick={() => { buzzLight(); google(); }} disabled={busy} className="btn-google w-full">
+          <GoogleMark /> {t.login.google}
+        </button>
+
+        <div className="flex items-center gap-3 py-1" aria-hidden>
+          <span className="h-px flex-1 bg-stone-200/70" />
+          <span className="font-sans text-xs text-stone-400">{t.login.or}</span>
+          <span className="h-px flex-1 bg-stone-200/70" />
+        </div>
+
         <label className="block"><span className="sr-only">{t.login.email}</span>
           <input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t.login.email} className="field" /></label>
         <label className="block"><span className="sr-only">{t.login.password}</span>
           <input type="password" required minLength={8} autoComplete={mode === "signup" ? "new-password" : "current-password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={t.login.password} className="field" /></label>
         {msg && <p role={msg.kind === "error" ? "alert" : "status"} className={`text-center font-sans text-[13px] ${msg.kind === "error" ? "text-red-600" : "text-stone-500"}`}>{msg.text}</p>}
         <button disabled={busy} className="btn-primary mt-1 w-full">{busy ? t.login.busy : mode === "signup" ? t.login.create : t.login.signin}</button>
-        <button type="button" onClick={handleGoogleLogin} disabled={busy} className="mt-2 flex w-full items-center justify-center gap-2 rounded-full border border-stone-200/70 bg-white py-2.5 font-display text-sm font-bold text-stone-700 shadow-sm transition hover:bg-stone-50">
-          <svg className="h-4 w-4" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
-            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.15 21.32 7.22 24 12 24z"/>
-            <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.18C.43 8.12 0 9.82 0 12s.43 3.88 1.18 5.4l4.09-3.16z"/>
-            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.15 2.68 1.18 6.6l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
-          </svg>
-          Continue with Google
-        </button>
+        <button type="button" onClick={() => { buzzLight(); magicLink(); }} disabled={busy} className="mx-auto py-1 font-display text-[13px] font-bold text-pine underline-offset-2 hover:underline">{t.login.magic}</button>
       </form>
 
       <div className="mt-auto flex flex-col items-center gap-1.5 pb-3 pt-4">
@@ -77,6 +101,21 @@ export default function Login() {
         </button>
         <p className="helpercopy">{t.login.private}</p>
       </div>
+    </>
+  );
+}
+
+export default function Login() {
+  return (
+    <main className="pb-safe mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 pt-8">
+      <div className="flex justify-end">
+        <LocaleSwitch />
+      </div>
+      <p className="text-center font-display text-xl font-bold text-pine">nara</p>
+      <span className="mx-auto mt-3 grid h-[104px] w-[104px] place-items-center"><Pip pose="wave" size={96} motion="breathe" /></span>
+      <Suspense>
+        <LoginForm />
+      </Suspense>
     </main>
   );
 }
