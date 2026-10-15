@@ -13,6 +13,9 @@ import { useSaveJournal } from "@/hooks/useJournal";
 import type { Mood } from "@/lib/moods";
 import { useLang } from "@/lib/i18n";
 import { buzzSuccess } from "@/lib/haptics";
+import { TemplateSelector } from "@/components/journal/TemplateSelector";
+import { DailyPromptBanner } from "@/components/journal/DailyPrompt";
+import { getTemplate, ENTRY_TEMPLATES } from "@/lib/templates";
 
 const MAX = 500;
 
@@ -24,7 +27,15 @@ export default function NewJournal() {
   const [mood, setMood] = useState<Mood>("calm");
   const [seconds, setSeconds] = useState(0);
   const [done, setDone] = useState<null | { queued: boolean }>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState("free");
   const lastKey = useRef(0);
+
+  const handleTemplateSelect = (template: any) => {
+    setSelectedTemplate(template.id);
+    if (template.id !== "free" && !content) {
+      setContent(template.structure);
+    }
+  };
 
   useEffect(() => {
     const id = setInterval(() => { if (Date.now() - lastKey.current < 5000) setSeconds((s) => s + 1); }, 1000);
@@ -44,6 +55,8 @@ export default function NewJournal() {
         <span className="w-9" />
       </header>
 
+      <DailyPromptBanner />
+
       <div>
         <h1 className="h-display">{t.journal.title}</h1>
         <p className="subcopy">{t.journal.sub}</p>
@@ -57,6 +70,12 @@ export default function NewJournal() {
           <span className="eyebrow">{t.journal.yourNote}</span>
           <Link href="/home" className="rounded-full bg-stone-100 px-3 py-1 font-display text-[11px] font-bold text-stone-500">{t.common.skip}</Link>
         </div>
+
+        <TemplateSelector
+          initialTemplate={selectedTemplate}
+          onSelect={handleTemplateSelect}
+        />
+
         <label htmlFor="entry" className="sr-only">{t.journal.yourNote}</label>
         <textarea
           id="entry" value={content} maxLength={MAX} autoFocus rows={6}
