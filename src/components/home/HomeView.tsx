@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
 import { Pip } from "@/components/pip/Pip";
 import { NoteMint } from "@/components/pip/PipAssets";
 import { ProgressRing } from "@/components/ui/ProgressRing";
@@ -88,16 +89,24 @@ export function HomeView() {
           </Link>
         ) : (
           <ul className="flex flex-col gap-2.5">
-            {entries.slice(0, 3).map((e) => {
+            {entries.slice(0, 3).map((e, idx) => {
               const Face = MOODS.find((m) => m.id === e.mood)?.Face ?? MOODS[2].Face;
               return (
-                <li key={e.id} className="rowcard p-3.5 shadow-sm">
+                <motion.li
+                  key={e.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.1, duration: 0.3 }}
+                  whileHover={{ scale: 1.015, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="rowcard p-3.5 shadow-sm cursor-pointer transition-shadow hover:shadow-md"
+                >
                   <span className="min-w-0 flex-1">
                     <span className="line-clamp-2 block text-left font-sans text-sm font-medium leading-relaxed text-pine">{e.content}</span>
                     <time dateTime={e.created_at} className="mt-0.5 block font-sans text-[11px] text-stone-400">{new Date(e.created_at).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}</time>
                   </span>
                   <span className="grid h-11 w-11 shrink-0 place-items-center"><Face size={44} /></span>
-                </li>
+                </motion.li>
               );
             })}
           </ul>
