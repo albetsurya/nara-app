@@ -76,12 +76,12 @@
 .tiptap p.is-editor-empty:first-child::before { content: attr(data-placeholder); @apply float-left h-0 pointer-events-none font-normal text-stone-300 dark:text-slate-600; }
 .tiptap-readonly { @apply min-h-0 py-0; }
 
-/* SVG asset dark mode: assets with hardcoded light backgrounds get a wrapper fix */
-.svg-asset-wrapper { display: inline-block; }
-.dark .svg-asset-wrapper[data-asset="stamp"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
-.dark .svg-asset-wrapper[data-asset="note"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
-.dark .svg-asset-wrapper[data-asset="paperclip"] { background: #202939; border-radius: 0.5rem; padding: 0.375rem; }
-.dark .svg-asset-wrapper[data-asset="heart"] { background: #202939; border-radius: 0.75rem; padding: 0.5rem; }
+/* SVG asset dark mode: remove padding so it does not distort layout or cause text overlaps */
+.svg-asset-wrapper { display: inline-flex; align-items: center; justify-content: center; }
+.dark .svg-asset-wrapper[data-asset="stamp"] { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.dark .svg-asset-wrapper[data-asset="note"] { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.dark .svg-asset-wrapper[data-asset="paperclip"] { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.dark .svg-asset-wrapper[data-asset="heart"] { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
 
 /* Safe-area helpers for installed PWA on notched phones */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
