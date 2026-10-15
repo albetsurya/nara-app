@@ -10,10 +10,14 @@ import { ProgressRing } from "@/components/ui/ProgressRing";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { CheckInSheet } from "./CheckInSheet";
 import { PreferencesCard } from "./PreferencesCard";
+import { OnThisDay } from "./OnThisDay";
+import { InsightsCard } from "./InsightsCard";
+import { GratitudeJar } from "./GratitudeJar";
 import { useProfile, useRecentJournals } from "@/hooks/useJournal";
 import { createClient } from "@/lib/supabase/client";
 import { DAILY_GOAL_SECONDS, keys, secondsWrittenToday } from "@/lib/queries";
 import { MOODS } from "@/lib/moods";
+import { stripHtml } from "@/lib/html";
 import { useSignOut } from "@/hooks/useSignOut";
 import { useLang } from "@/lib/i18n";
 import { buzzLight } from "@/lib/haptics";
@@ -125,7 +129,14 @@ export function HomeView() {
       </section>
 
       <section aria-labelledby="recent-h">
-        <h2 id="recent-h" className="mb-2 text-center font-display text-[15px] font-bold text-pine">{t.home.recent}</h2>
+        <div className="mb-2 flex items-baseline justify-between">
+          <h2 id="recent-h" className="font-display text-[15px] font-bold text-pine">{t.home.recent}</h2>
+          {entries.length > 0 && (
+            <Link href="/journal" prefetch className="font-display text-xs font-bold text-pine underline underline-offset-2">
+              {t.home.seeAll}
+            </Link>
+          )}
+        </div>
         {entries.length === 0 ? (
           <Link href="/journal/new" className="rowcard p-3.5 text-left shadow-sm">
             <span className="flex items-center gap-3">
@@ -140,7 +151,7 @@ export function HomeView() {
               return (
                 <Link key={e.id} href={`/journal/${e.id}`} prefetch className="rowcard p-3.5 shadow-sm">
                   <span className="min-w-0 flex-1">
-                    <span className="line-clamp-2 block text-left font-sans text-sm font-medium leading-relaxed text-pine">{e.content}</span>
+                    <span className="line-clamp-2 block text-left font-sans text-sm font-medium leading-relaxed text-pine">{stripHtml(e.content) || e.content}</span>
                     <time dateTime={e.created_at} className="mt-0.5 block font-sans text-[11px] text-stone-400">{new Date(e.created_at).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}</time>
                   </span>
                   <span className="grid h-11 w-11 shrink-0 place-items-center"><Face size={44} /></span>
@@ -151,7 +162,13 @@ export function HomeView() {
         )}
       </section>
 
+      <OnThisDay />
+
       <StampsPreview />
+
+      <InsightsCard />
+
+      <GratitudeJar />
 
       <PreferencesCard username={profile?.username ?? null} onSaveName={saveName} savingName={savingName} />
     </main>
