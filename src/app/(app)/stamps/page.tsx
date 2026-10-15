@@ -7,7 +7,7 @@ import { Pip } from "@/components/pip/Pip";
 import { Stamp as StampArt } from "@/components/pip/PipAssets";
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, keys } from "@/lib/queries";
-import { stampMeta } from "@/lib/stamps";
+import { stampText } from "@/lib/stamps";
 import { useLang } from "@/lib/i18n";
 
 const PAGE_SIZE = 6;
@@ -45,7 +45,7 @@ export default function StampsPage() {
         <section aria-label="Stamp collection" className={isPlaceholderData ? "opacity-60 transition" : "transition"}>
           <ul className="grid grid-cols-2 gap-2.5">
             {rows.map((s, index) => {
-              const m = stampMeta(s.stamp_type);
+              const m = stampText(t, s.stamp_type);
               return (
                 <motion.li
                   key={s.id}
