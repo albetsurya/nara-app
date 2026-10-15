@@ -36,11 +36,13 @@ export default function Login() {
     const { error } = await sb.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: redirectTo(),
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
-    setBusy(false);
-    if (error) setMsg({ kind: "error", text: error.message });
+    if (error) {
+      setBusy(false);
+      setMsg({ kind: "error", text: error.message });
+    }
   }
 
   return (
