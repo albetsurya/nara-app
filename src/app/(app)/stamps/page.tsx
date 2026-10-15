@@ -56,18 +56,22 @@ export default function StampsPage() {
                     transition={{ type: "spring", stiffness: 350, damping: 22, delay: index * 0.08 }}
                     whileHover={{ scale: 1.03, rotate: 1 }}
                     whileTap={{ scale: 0.96 }}
-                    className="flex cursor-pointer flex-col items-center rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm"
+                    className="flex cursor-pointer flex-col items-center justify-between rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm min-h-[160px]"
                   >
                   <motion.span
                     animate={{ rotate: [-2, 2, -2] }}
                     transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                    className="grid h-16 w-16 place-items-center"
+                    className="grid h-14 w-14 place-items-center shrink-0"
                   >
-                    <span className="svg-asset-wrapper" data-asset="stamp"><StampArt size={60} /></span>
+                    <span className="svg-asset-wrapper" data-asset="stamp"><StampArt size={52} /></span>
                   </motion.span>
-                  <p className="mt-2 font-display text-[13.5px] font-bold leading-snug on-tint">{m.title}</p>
-                  <p className="mt-0.5 font-sans text-[11.5px] leading-snug on-tint-soft">{m.blurb}</p>
-                  <time className="mt-1.5 font-display text-[10px] font-bold tracking-[0.12em] on-tint-soft">{new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</time>
+                  <div className="my-1 flex flex-col justify-center">
+                    <p className="font-display text-[13px] font-bold leading-tight text-stone-900 line-clamp-1">{m.title}</p>
+                    <p className="mt-0.5 font-sans text-[11px] leading-tight text-stone-600 line-clamp-2">{m.blurb}</p>
+                  </div>
+                  <time className="font-display text-[10px] font-bold tracking-[0.12em] text-stone-500 shrink-0">
+                    {new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
+                  </time>
                   </motion.li>
                 </Link>
               );

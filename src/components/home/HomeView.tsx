@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Pip } from "@/components/pip/Pip";
 import { NoteMint } from "@/components/pip/PipAssets";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { CheckInSheet } from "./CheckInSheet";
-import { PreferencesCard } from "./PreferencesCard";
 import { OnThisDay } from "./OnThisDay";
-import { InsightsCard } from "./InsightsCard";
-import { GratitudeJar } from "./GratitudeJar";
 import { useProfile, useRecentJournals } from "@/hooks/useJournal";
 import { createClient } from "@/lib/supabase/client";
 import { DAILY_GOAL_SECONDS, keys, secondsWrittenToday } from "@/lib/queries";
@@ -32,7 +31,6 @@ export function HomeView() {
   const { t, fmt } = useLang();
   const { data: profile } = useProfile();
   const { data: entries = [] } = useRecentJournals();
-  const [savingName, setSavingName] = useState(false);
 
   useEffect(() => {
     if (!profile) return;
@@ -44,17 +42,6 @@ export function HomeView() {
         .then(({ error }) => { if (!error) { localStorage.removeItem("nara:onboarding"); qc.invalidateQueries({ queryKey: keys.profile }); } });
     } catch { localStorage.removeItem("nara:onboarding"); }
   }, [profile, qc]);
-
-  const saveName = async (name: string) => {
-    if (!profile || savingName) return;
-    setSavingName(true);
-    try {
-      const { error } = await createClient().from("profiles").update({ username: name || null }).eq("id", profile.id);
-      if (!error) qc.invalidateQueries({ queryKey: keys.profile });
-    } finally {
-      setSavingName(false);
-    }
-  };
 
   const secs = secondsWrittenToday(entries);
   const mins = Math.floor(secs / 60);
@@ -86,18 +73,9 @@ export function HomeView() {
     <main className="flex flex-col gap-4 pt-1">
       <header className="sticky-top flex items-center justify-between">
         <p className="font-display text-xl font-bold text-pine">nara</p>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <button
-            onClick={() => {
-              buzzLight();
-              signOut();
-            }}
-            className="rounded-full border border-stone-200/70 bg-white px-3 py-1.5 font-display text-xs font-bold text-stone-500 shadow-sm"
-          >
-            {t.home.signOut}
-          </button>
-        </div>
+        <Link href="/profile" aria-label={t.nav.profile} className="rounded-full border border-stone-200/70 bg-white p-2 shadow-sm transition active:scale-95">
+          <FontAwesomeIcon icon={faUser} className="h-4 w-4 text-stone-600" />
+        </Link>
       </header>
 
       <div>
@@ -168,12 +146,6 @@ export function HomeView() {
       <OnThisDay />
 
       <StampsPreview />
-
-      <InsightsCard />
-
-      <GratitudeJar />
-
-      <PreferencesCard username={profile?.username ?? null} onSaveName={saveName} savingName={savingName} />
     </main>
   );
 }

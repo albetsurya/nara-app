@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { LocaleSwitch } from "@/components/ui/LocaleSwitch";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { PreferencesCard } from "@/components/home/PreferencesCard";
@@ -12,6 +15,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { keys } from "@/lib/queries";
 import { buzzLight } from "@/lib/haptics";
+import { signOut as nextAuthSignOut } from "next-auth/react";
 
 export default function ProfilePage() {
   const { t, fmt } = useLang();
@@ -34,6 +38,8 @@ export default function ProfilePage() {
 
   const handleSignOut = () => {
     buzzLight();
+    // Sign out from both NextAuth and Supabase session
+    nextAuthSignOut({ callbackUrl: "/login" });
     signOut();
   };
 
@@ -53,10 +59,9 @@ export default function ProfilePage() {
     <main className="flex flex-col gap-4 py-1">
       <header className="sticky-top flex items-center justify-between">
         <p className="font-display text-xl font-bold text-pine">nara</p>
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <LocaleSwitch />
-        </div>
+        <Link href="/profile" className="rounded-full border border-stone-200/70 bg-white p-2 shadow-sm transition active:scale-95">
+        <FontAwesomeIcon icon={faUser} className="h-4 w-4 text-stone-600" />
+        </Link>
       </header>
 
       <section className="flex flex-col items-center gap-3 rounded-3xl border border-stone-200/50 bg-white px-4 py-6 shadow-sm">
