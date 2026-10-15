@@ -59,6 +59,9 @@
 .dark .ring-pine { --tw-ring-color: rgb(148 163 184); }
 .dark .shadow-sm, .dark .shadow-md, .dark .shadow-float, .dark .shadow-card { --tw-shadow-color: rgb(0 0 0 / 0.4); }
 
+/* Google button: always white + dark text, in both themes (brand convention). */
+.dark .btn-google, .dark .btn-google:hover { background-color: #ffffff; color: #1f293b; border-color: #e4e4e7; }
+
 /* Safe-area helpers for installed PWA on notched phones */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
 .pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }
