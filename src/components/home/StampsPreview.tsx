@@ -6,17 +6,19 @@ import { Stamp } from "@/components/pip/PipAssets";
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, keys } from "@/lib/queries";
 import { stampMeta } from "@/lib/stamps";
+import { useLang } from "@/lib/i18n";
 
 export default function StampsPreview() {
   const sb = createClient();
+  const { t } = useLang();
   const { data } = useQuery({ queryKey: keys.stamps(0, 3), queryFn: () => fetchStampsPage(sb, 0, 3) });
   const rows = data?.rows ?? [];
 
   return (
     <section aria-labelledby="stamps-h" className="rounded-3xl border border-stone-200/50 bg-white p-4 text-center shadow-sm">
-      <h2 id="stamps-h" className="font-display text-[15px] font-bold text-pine">Your stamps</h2>
+      <h2 id="stamps-h" className="font-display text-[15px] font-bold text-pine">{t.home.yourStamps}</h2>
       {rows.length === 0 ? (
-        <p className="mt-1 font-sans text-[13px] leading-relaxed text-stone-500">Write your first note to collect your first stamp.</p>
+        <p className="mt-1 font-sans text-[13px] leading-relaxed text-stone-500">{t.home.stampsEmpty}</p>
       ) : (
         <ul className="mt-3 flex justify-center gap-2">
           {rows.map((s) => (
@@ -27,7 +29,7 @@ export default function StampsPreview() {
           ))}
         </ul>
       )}
-      <Link href="/stamps" className="mt-2 inline-block font-display text-xs font-bold text-pine underline underline-offset-2">See all</Link>
+      <Link href="/stamps" className="mt-2 inline-block font-display text-xs font-bold text-pine underline underline-offset-2">{t.home.seeAll}</Link>
     </section>
   );
 }
