@@ -449,7 +449,7 @@ export default function Onboarding() {
               <div className="mt-5 flex flex-col items-center">
                 <div className="flex h-52 w-40 flex-col items-center justify-between rounded-xl border-4 border-dashed border-white bg-[#D98A78] p-3 text-white shadow-md">
                   <div className="font-display text-[10px] font-bold tracking-[0.14em] opacity-90">
-                    NARA / FIRST EDITION
+                    {ob.stampEdition}
                   </div>
 
                   <svg width={64} height={64} viewBox="0 0 72 72" fill="none" aria-hidden>
@@ -461,7 +461,7 @@ export default function Onboarding() {
                   </svg>
 
                   <div className="flex w-full justify-between font-display text-[10px] font-bold tracking-wider">
-                    <span>FIRST WORD</span>
+                    <span>{ob.stampFirst}</span>
                     <span>001</span>
                   </div>
                 </div>
