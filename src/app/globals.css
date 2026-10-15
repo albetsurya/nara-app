@@ -21,6 +21,7 @@
   .btn-mint { @apply btn bg-mint text-pine dark:text-slate-900; }
   .btn-ghost { @apply btn bg-transparent text-stone-500 hover:text-pine dark:text-slate-400 dark:hover:text-slate-100; }
   .btn-disabled { @apply btn bg-stone-200/70 text-stone-400 cursor-not-allowed shadow-none dark:bg-slate-700/50 dark:text-slate-500; }
+  .btn-google { @apply btn bg-white text-slate-800 border border-stone-200/70 shadow-sm hover:bg-stone-50; }
   .field { @apply w-full rounded-2xl bg-white px-4 py-3 border border-stone-200/70 font-sans text-[15px] font-normal leading-relaxed focus:border-pine focus:ring-0 placeholder:text-stone-300 placeholder:font-normal dark:bg-[#202939] dark:border-slate-700/60 dark:text-slate-100 dark:placeholder:text-slate-600; }
   .eyebrow { @apply font-display text-[10px] font-bold tracking-[0.14em] text-stone-400 dark:text-slate-500; }
   .pill-active { @apply rounded-full bg-pine-soft text-pine border border-[#C9D4E3] dark:bg-slate-700 dark:text-slate-100 dark:border-slate-600; }
@@ -34,10 +35,13 @@
 
 /* Dark theme: hard-coded light surfaces flip to slate. Pastel tinted cards
    (bg-[#...]) are intentionally left light for contrast. */
+.dark .bg-canvas { --tw-bg-opacity: 1; background-color: rgb(20 26 38 / var(--tw-bg-opacity)); }
 .dark .bg-white { --tw-bg-opacity: 1; background-color: rgb(32 41 57 / var(--tw-bg-opacity)); }
 .dark .bg-white\/95 { background-color: rgb(32 41 57 / 0.95); }
 .dark .bg-stone-100 { --tw-bg-opacity: 1; background-color: rgb(43 53 71 / var(--tw-bg-opacity)); }
 .dark .bg-stone-200, .dark .bg-stone-300 { --tw-bg-opacity: 1; background-color: rgb(51 65 85 / var(--tw-bg-opacity)); }
+.dark .bg-stone-200\/70 { background-color: rgb(51 65 85 / 0.7); }
+.dark .bg-mint { --tw-bg-opacity: 1; background-color: rgb(27 67 55 / var(--tw-bg-opacity)); }
 .dark .bg-pine-soft { --tw-bg-opacity: 1; background-color: rgb(43 53 71 / var(--tw-bg-opacity)); }
 .dark .bg-pine { --tw-bg-opacity: 1; background-color: rgb(237 242 247 / var(--tw-bg-opacity)); }
 .dark .text-pine { --tw-text-opacity: 1; color: rgb(236 241 247 / var(--tw-text-opacity)); }
