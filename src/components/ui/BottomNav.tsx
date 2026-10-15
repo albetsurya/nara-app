@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,12 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faPlus, faStamp, faComments } from "@fortawesome/free-solid-svg-icons";
 import { createClient } from "@/lib/supabase/client";
 import { fetchStampsPage, fetchProfile, fetchRecentJournals, keys } from "@/lib/queries";
-
-const items = [
-  { href: "/home", label: "Home", icon: faHouse },
-  { href: "/stamps", label: "Stamps", icon: faStamp },
-  { href: "/chat", label: "Pip", icon: faComments },
-] as const;
+import { useLang } from "@/lib/i18n";
+import { buzzLight } from "@/lib/haptics";
 
 /** Warm the RSC payload and the TanStack cache before the user taps. */
 function useWarmRoute(href: string) {
@@ -65,18 +60,19 @@ function Tab({
       onMouseEnter={warm}
       onTouchStart={warm}
       onFocus={warm}
-      onClick={() => onNavigate(href)}
+      onClick={() => {
+        buzzLight();
+        onNavigate(href);
+      }}
       className="flex h-full w-full flex-col items-center justify-center gap-[3px]"
     >
-      <motion.span
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.85 }}
+      <span
         className={`grid h-[30px] w-[52px] place-items-center rounded-full transition-colors ${
-          active ? "bg-pine text-[#FFF9F0] shadow-md" : pending ? "bg-pine-soft text-pine" : "text-stone-400"
+          active ? "bg-pine text-[#FFF9F0]" : pending ? "bg-pine-soft text-pine" : "text-stone-400"
         } ${pending && !active ? "animate-pulse" : ""}`}
       >
         <FontAwesomeIcon icon={icon} className="h-[17px] w-[17px] leading-none" />
-      </motion.span>
+      </span>
       <span className={`font-display text-[10.5px] leading-none ${active ? "font-bold text-pine" : "font-semibold text-stone-400"}`}>
         {label}
       </span>
@@ -88,15 +84,13 @@ export function BottomNav() {
   const path = usePathname();
   const router = useRouter();
   const qc = useQueryClient();
+  const { t } = useLang();
   const [pendingHref, setPendingHref] = useState<string | null>(null);
 
-  // Clear the pending shimmer as soon as the new route commits.
   useEffect(() => {
     setPendingHref(null);
   }, [path]);
 
-  // Prefetch every tab destination once the nav mounts and the browser is idle,
-  // so the first tap rarely waits for the network.
   useEffect(() => {
     let cancelled = false;
     const run = () => {
@@ -124,10 +118,10 @@ export function BottomNav() {
         (window as unknown as { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(id);
       };
     }
-    const t = window.setTimeout(run, 800);
+    const timer = window.setTimeout(run, 800);
     return () => {
       cancelled = true;
-      window.clearTimeout(t);
+      window.clearTimeout(timer);
     };
   }, [router, qc]);
 
@@ -138,17 +132,20 @@ export function BottomNav() {
   return (
     <nav aria-label="Main" className="fixed bottom-0 left-1/2 z-20 w-full max-w-md -translate-x-1/2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <div className="grid h-[68px] grid-cols-[1fr_auto_1fr_1fr] items-center rounded-[28px] border border-stone-200/70 bg-white/95 px-2 shadow-float backdrop-blur">
-        <Tab href="/home" label="Home" icon={faHouse} active={path.startsWith("/home")} pending={pendingHref === "/home"} onNavigate={setPendingHref} />
+        <Tab href="/home" label={t.nav.home} icon={faHouse} active={path.startsWith("/home")} pending={pendingHref === "/home"} onNavigate={setPendingHref} />
         <div className="flex w-[64px] items-center justify-center">
           <Link
             href="/journal/new"
             prefetch
-            aria-label="Write a new entry"
+            aria-label={t.nav.write}
             aria-current={isNew ? "page" : undefined}
             onMouseEnter={warmNew}
             onTouchStart={warmNew}
             onFocus={warmNew}
-            onClick={() => setPendingHref("/journal/new")}
+            onClick={() => {
+              buzzLight();
+              setPendingHref("/journal/new");
+            }}
             className={`grid h-[52px] w-[52px] place-items-center rounded-full shadow-md transition active:scale-95 ${
               isNew ? "bg-mint text-pine" : pendingNew ? "bg-pine-soft text-pine" : "bg-pine text-[#FFF9F0] hover:bg-pine-deep"
             } ${pendingNew && !isNew ? "animate-pulse" : ""}`}
@@ -156,8 +153,8 @@ export function BottomNav() {
             <FontAwesomeIcon icon={faPlus} className="h-[20px] w-[20px] leading-none" />
           </Link>
         </div>
-        <Tab href="/stamps" label="Stamps" icon={faStamp} active={path.startsWith("/stamps")} pending={pendingHref === "/stamps"} onNavigate={setPendingHref} />
-        <Tab href="/chat" label="Pip" icon={faComments} active={path.startsWith("/chat")} pending={pendingHref === "/chat"} onNavigate={setPendingHref} />
+        <Tab href="/stamps" label={t.nav.stamps} icon={faStamp} active={path.startsWith("/stamps")} pending={pendingHref === "/stamps"} onNavigate={setPendingHref} />
+        <Tab href="/chat" label={t.nav.pip} icon={faComments} active={path.startsWith("/chat")} pending={pendingHref === "/chat"} onNavigate={setPendingHref} />
       </div>
     </nav>
   );
