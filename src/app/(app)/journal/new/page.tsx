@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faBullseye } from "@fortawesome/free-solid-svg-icons";
 import { MoodPicker } from "@/components/journal/MoodPicker";
 import { Pip } from "@/components/pip/Pip";
 import { Dew } from "@/components/pip/PipAssets";
@@ -101,9 +101,10 @@ export default function NewJournal() {
       <header className="sticky-top flex items-center justify-between">
         <Link href="/home" aria-label={t.common.back} className="grid h-9 w-9 place-items-center rounded-full border border-stone-200/70 bg-white shadow-sm transition active:scale-95"><FontAwesomeIcon icon={faChevronLeft} className="h-3.5 w-3.5 text-stone-600" /></Link>
         <div className="flex flex-col items-center gap-1">
-          <p className={`font-display text-[13px] font-bold tabular-nums ${idle ? "text-stone-400" : "text-pine"}`}>
-            {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")} · {fmt(t.journal.timerGoal, { a: Math.floor(Math.min(total, DAILY_GOAL_SECONDS) / 60), b: goalMins })}
-          </p>
+          <span className={`flex items-center gap-1.5 rounded-full px-2.5 py-1 font-display text-[12px] font-bold tabular-nums shadow-sm transition-colors ${reached ? "bg-mint text-pine" : "bg-pine-soft text-pine"}`}>
+            <FontAwesomeIcon icon={faBullseye} className="h-3 w-3" />
+            {fmt(t.journal.timerGoalToday, { a: Math.floor(Math.min(total, DAILY_GOAL_SECONDS) / 60), b: goalMins })}
+          </span>
           <div className="h-1.5 w-24 overflow-hidden rounded-full bg-stone-200/70" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(Math.min(total / DAILY_GOAL_SECONDS, 1) * 100)}>
             <div
               className={`h-full rounded-full transition-all duration-500 ${reached ? "bg-mint" : "bg-pine"}`}

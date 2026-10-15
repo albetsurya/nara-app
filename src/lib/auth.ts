@@ -19,6 +19,15 @@ export const authOptions: NextAuthOptions = {
       if (account?.provider === "google" && account.id_token) {
         (token as typeof token & { idToken?: string }).idToken = account.id_token;
       }
+      // Also store the Google profile data for later profile sync
+      if (account?.provider === "google") {
+        const profile = account as { name?: string; email?: string; picture?: string } | null;
+        if (profile) {
+          token.name = profile.name;
+          token.email = profile.email;
+          token.picture = profile.picture;
+        }
+      }
       return token;
     },
     async session({ session }) {
