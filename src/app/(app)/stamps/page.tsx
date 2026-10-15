@@ -56,7 +56,7 @@ export default function StampsPage() {
                     transition={{ type: "spring", stiffness: 350, damping: 22, delay: index * 0.08 }}
                     whileHover={{ scale: 1.03, rotate: 1 }}
                     whileTap={{ scale: 0.96 }}
-                    className="flex cursor-pointer flex-col items-center justify-between rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm min-h-[160px]"
+                    className="flex cursor-pointer flex-col items-center justify-between rounded-3xl border border-stone-200/50 bg-[#F3EDE2] p-4 text-center shadow-sm min-h-[160px] dark:bg-[#1E293B] dark:border-slate-700"
                   >
                   <motion.span
                     animate={{ rotate: [-2, 2, -2] }}
@@ -66,10 +66,10 @@ export default function StampsPage() {
                     <span className="svg-asset-wrapper" data-asset="stamp"><StampArt size={52} /></span>
                   </motion.span>
                   <div className="my-1 flex flex-col justify-center">
-                    <p className="font-display text-[13px] font-bold leading-tight text-stone-900 line-clamp-1">{m.title}</p>
-                    <p className="mt-0.5 font-sans text-[11px] leading-tight text-stone-600 line-clamp-2">{m.blurb}</p>
+                    <p className="font-display text-[13px] font-bold leading-tight text-stone-900 dark:text-slate-100 line-clamp-1">{m.title}</p>
+                    <p className="mt-0.5 font-sans text-[11px] leading-tight text-stone-600 dark:text-slate-300 line-clamp-2">{m.blurb}</p>
                   </div>
-                  <time className="font-display text-[10px] font-bold tracking-[0.12em] text-stone-500 shrink-0">
+                  <time className="font-display text-[10px] font-bold tracking-[0.12em] text-stone-500 dark:text-slate-400 shrink-0">
                     {new Date(s.earned_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
                   </time>
                   </motion.li>

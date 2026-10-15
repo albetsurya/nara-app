@@ -22,9 +22,9 @@ export default function StampsPreview() {
       ) : (
         <ul className="mt-3 flex justify-center gap-2">
           {rows.map((s) => (
-            <li key={s.id} className="flex flex-col items-center text-center">
-              <span className="grid h-14 w-14 place-items-center"><span className="svg-asset-wrapper" data-asset="stamp"><Stamp size={52} /></span></span>
-              <span className="mt-1 font-display text-[11px] font-bold leading-tight text-pine line-clamp-1">{stampText(t, s.stamp_type).title}</span>
+            <li key={s.id} className="flex flex-1 flex-col items-center text-center max-w-[90px]">
+              <span className="grid h-12 w-12 shrink-0 place-items-center"><span className="svg-asset-wrapper" data-asset="stamp"><Stamp size={44} /></span></span>
+              <span className="mt-1 font-display text-[11px] font-bold leading-tight text-pine line-clamp-1 w-full">{stampText(t, s.stamp_type).title}</span>
             </li>
           ))}
         </ul>
