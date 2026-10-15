@@ -63,8 +63,7 @@ if (files.length === 0) {
 }
 
 try {
-  const client = new Client(connectionConfig());
-  await client.connect();
+  const client = new Client(connectionConfig());  await client.connect();
   console.log(`Terhubung. Menjalankan ${files.length} migrasi...`);
   for (const f of files) {
     const sql = readFileSync(join(dir, f), "utf8");
@@ -74,6 +73,11 @@ try {
   await client.end();
   console.log("Semua migrasi berhasil.");
 } catch (err) {
+  // --optional dipakai saat build (mis. Vercel): tanpa kredensial, lewati tanpa menggagalkan build.
+  if (process.argv.includes("--optional") && /SUPABASE_DB_PASSWORD belum diisi/.test(err.message)) {
+    console.log("Lewati migrasi: SUPABASE_DB_PASSWORD tidak diset.");
+    process.exit(0);
+  }
   console.error(`Gagal: ${err.message}`);
   process.exit(1);
 }

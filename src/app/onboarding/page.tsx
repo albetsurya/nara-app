@@ -129,10 +129,7 @@ export default function Onboarding() {
             <div className="grid flex-1 place-items-center">
               <div className="w-full">
                 <div className="mx-auto grid w-full max-w-[300px] grid-cols-2 gap-3 pt-5">
-                  <div className="relative -rotate-6 rounded-2xl border border-amber-200/40 bg-[#FFF6D4] p-3.5 pt-5 shadow-md">
-                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <Paperclip size={26} />
-                    </span>
+                  <div className="relative -rotate-6 rounded-2xl border border-amber-200/40 bg-[#FFF6D4] p-3.5 shadow-md">
                     <div className="mx-auto mb-1.5 h-2.5 w-2.5 rounded-full bg-red-400" />
                     <p className="text-center font-display text-[13px] font-bold leading-snug text-amber-950">More walks.</p>
                     <p className="text-center font-display text-[13px] font-medium text-amber-900/80">Less scrolling.</p>
@@ -146,7 +143,10 @@ export default function Onboarding() {
                     <p className="text-center font-display text-[13px] font-medium text-stone-500">message.</p>
                   </div>
 
-                  <div className="relative -rotate-3 rounded-2xl border border-indigo-100 bg-[#EBE7F7] p-3.5 shadow-md">
+                  <div className="relative -rotate-3 rounded-2xl border border-indigo-100 bg-[#EBE7F7] p-3.5 pt-5 shadow-md">
+                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                      <Paperclip size={26} />
+                    </span>
                     <p className="text-center font-display text-[13px] font-semibold leading-snug text-indigo-950">something for fun.</p>
                   </div>
 
