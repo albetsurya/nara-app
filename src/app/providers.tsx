@@ -3,12 +3,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { MotionConfig } from "framer-motion";
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/client";
 import { flushQueue } from "@/lib/offlineQueue";
 import { LanguageProvider } from "@/lib/i18n";
-import { SessionProvider } from "next-auth/react";
 
 const ReactQueryDevtools = dynamic(
   () => import("@tanstack/react-query-devtools").then((m) => m.ReactQueryDevtools),
