@@ -146,17 +146,11 @@ export default function Onboarding() {
                     <p className="text-center font-display text-[13px] font-medium text-stone-500">message.</p>
                   </div>
 
-                  <div className="relative -rotate-3 rounded-2xl border border-indigo-100 bg-[#EBE7F7] p-3.5 pt-5 shadow-md">
-                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <Paperclip size={26} />
-                    </span>
+                  <div className="relative -rotate-3 rounded-2xl border border-indigo-100 bg-[#EBE7F7] p-3.5 shadow-md">
                     <p className="text-center font-display text-[13px] font-semibold leading-snug text-indigo-950">something for fun.</p>
                   </div>
 
-                  <div className="relative rotate-3 rounded-2xl border border-orange-100 bg-[#FFE4DC] p-3.5 pt-5 shadow-md">
-                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                      <Paperclip size={26} />
-                    </span>
+                  <div className="relative rotate-3 rounded-2xl border border-orange-100 bg-[#FFE4DC] p-3.5 shadow-md">
                     <p className="text-center font-display text-[13px] font-semibold leading-snug text-orange-950">slow days count, too</p>
                   </div>
                 </div>
