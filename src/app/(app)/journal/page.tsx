@@ -13,15 +13,25 @@ export default function JournalListPage() {
   const { data: entries = [], isLoading } = useRecentJournals();
   const [query, setQuery] = useState("");
   const [mood, setMood] = useState<Mood | "all">("all");
+  const [dateFilter, setDateFilter] = useState<Date | null>(null);
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
+    const d = dateFilter ? new Date(dateFilter) : null;
     return entries.filter((e) => {
       if (mood !== "all" && e.mood !== mood) return false;
+      if (d) {
+        const eDate = new Date(e.created_at);
+        if (eDate.getFullYear() !== d.getFullYear() || eDate.getMonth() !== d.getMonth() || eDate.getDate() !== d.getDate()) return false;
+      }
       if (!q) return true;
       return stripHtml(e.content).toLowerCase().includes(q);
     });
-  }, [entries, query, mood]);
+  }, [entries, query, mood, dateFilter]);
+
+  const handleDateChange = (date: Date) => {
+    setDateFilter(date);
+  };
 
   return (
     <main className="flex flex-col gap-4 py-1">
@@ -41,14 +51,16 @@ export default function JournalListPage() {
         />
       </label>
 
-      <div className="flex flex-wrap gap-2" role="group" aria-label={t.journal.moodTitle}>
+<div className="flex flex-wrap gap-2" role="group" aria-label={t.journal.moodTitle}>
         <button
           onClick={() => {
             buzzLight();
             setMood("all");
+            setDateFilter(null);
+            setQuery("");
           }}
-          aria-pressed={mood === "all"}
-          className={`rounded-full px-3.5 py-1.5 font-display text-xs font-bold transition ${mood === "all" ? "pill-active" : "pill-idle"}`}
+          aria-pressed={mood === "all" && !dateFilter}
+          className={`rounded-full px-3.5 py-1.5 font-display text-xs font-bold transition ${!dateFilter ? "pill-active" : "pill-idle"}`}
         >
           {t.journal.filterAll}
         </button>
@@ -58,6 +70,7 @@ export default function JournalListPage() {
             onClick={() => {
               buzzLight();
               setMood(mood === id ? "all" : id);
+              setDateFilter(null);
             }}
             aria-pressed={mood === id}
             title={t.moods[id]}
@@ -69,7 +82,31 @@ export default function JournalListPage() {
             {t.moods[id]}
           </button>
         ))}
+        <button
+          onClick={() => setDateFilter(new Date())}
+          className={`rounded-full px-3.5 py-1.5 font-display text-xs font-bold transition ${dateFilter ? "pill-active" : "pill-idle"}`}
+          aria-label="Filter by date"
+        >
+          {dateFilter ? `Hanya ${dateFilter.toLocaleDateString(undefined, { month: "short", day: "numeric" })}` : t.journal.searchPh}
+        </button>
+        <button
+          onClick={() => {
+            buzzLight();
+            setDateFilter(null);
+            setQuery("");
+          }}
+          className={`rounded-full px-3.5 py-1.5 font-display text-xs font-bold transition pill-active`}
+          aria-label="Lihat semua catatan"
+        >
+          {t.journal.seeAll}
+        </button>
       </div>
+
+      {dateFilter && (
+        <p className="mt-2 font-sans text-sm text-stone-500">
+          {t.journal.noResults} for {dateFilter.toLocaleDateString(undefined, { month: "short", day: "numeric" })}.
+        </p>
+      )}
 
       {isLoading ? (
         <div className="flex animate-pulse flex-col gap-2.5" aria-label="Loading">
