@@ -331,3 +331,241 @@ export function AnimatedShelly(props: AssetProps) {
     </Base>
   );
 }
+
+export function NaraPipTimer(props: AssetProps) {
+  return (
+    <Base vb={[200, 160]} label="Pip duduk di atas progress timer" {...props}>
+      <path d="M30 148A70 70 0 0 1 170 148" fill="none" stroke="#E2E8F0" strokeWidth="8" strokeLinecap="round" />
+      <path d="M30 148A70 70 0 0 1 100.00 78.00" fill="none" stroke="#6EE7B7" strokeWidth="8" strokeLinecap="round" />
+      <ellipse cx="100.0" cy="76.0" rx="22" ry="2.8" fill="#5B6B85" opacity=".16" transform="rotate(0.0 100.0 75.0)"/>
+      <defs><clipPath id="npt"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs>
+      <g transform="translate(100.00 75.00) rotate(0.00) scale(.4) translate(-100 -196)">
+        <path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/>
+        <path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/>
+        <path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/>
+        <path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/>
+        <g clipPath="url(#npt)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/>
+          <path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/>
+        </g>
+        <circle cx="76" cy="136" r="11" fill="#2F3B54"/>
+        <circle cx="79.8" cy="131.6" r="4.0" fill="#fff"/>
+        <circle cx="72.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/>
+        <circle cx="124" cy="136" r="11" fill="#2F3B54"/>
+        <circle cx="127.8" cy="131.6" r="4.0" fill="#fff"/>
+        <circle cx="120.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/>
+        <ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <path d="M91 151Q100 160 109 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </g>
+    </Base>
+  );
+}
+
+export function NaraIconGratitude(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Gratitude: Moss memeluk daun" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#FEF3C7"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 1.7) scale(.42)">
+        <defs><clipPath id="ig1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <g clipPath="url(#ig1)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/>
+          <ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/>
+        </g>
+        <circle cx="72" cy="118" r="10.5" fill="#2F3B54"/>
+        <circle cx="75.7" cy="113.8" r="3.8" fill="#fff"/>
+        <circle cx="68.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/>
+        <circle cx="128" cy="118" r="10.5" fill="#2F3B54"/>
+        <circle cx="131.7" cy="113.8" r="3.8" fill="#fff"/>
+        <circle cx="124.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/>
+        <ellipse cx="52" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <ellipse cx="148" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <path d="M91 133Q100 142 109 133" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/>
+        <circle cx="84" cy="76" r="5" fill="#86B896"/>
+        <circle cx="118" cy="80" r="4" fill="#86B896"/>
+        <circle cx="102" cy="68" r="3.5" fill="#86B896"/>
+        <g transform="translate(72 146)">
+          <path d="M0 0C28 -8 58 12 54 48C26 54 -4 32 0 0Z" fill="#6EE7B7"/>
+          <path d="M5 5C22 18 38 32 50 46" fill="none" stroke="#34D399" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+        </g>
+        <path d="M28 158C34 178 58 186 80 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/>
+        <path d="M172 158C166 178 142 186 120 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/>
+      </g>
+    </Base>
+  );
+}
+
+export function NaraIconReflection(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Reflection: Moss dengan gelembung pikiran kosong" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#E2E8F0"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 13.4) scale(.36)">
+        <defs><clipPath id="ir1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <path d="M176 148C192 140 190 116 174 102" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="172" cy="100" r="6" fill="#2F3B54"/>
+        <path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/>
+        <g clipPath="url(#ir1)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/>
+          <ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/>
+        </g>
+        <circle cx="72" cy="142" r="10.5" fill="#2F3B54"/>
+        <circle cx="75.7" cy="137.8" r="3.8" fill="#fff"/>
+        <circle cx="68.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
+        <circle cx="128" cy="142" r="10.5" fill="#2F3B54"/>
+        <circle cx="131.7" cy="137.8" r="3.8" fill="#fff"/>
+        <circle cx="124.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
+        <ellipse cx="52" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <ellipse cx="148" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <path d="M91 158Q100 167 109 158" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/>
+        <circle cx="84" cy="76" r="5" fill="#86B896"/>
+        <circle cx="118" cy="80" r="4" fill="#86B896"/>
+        <circle cx="102" cy="68" r="3.5" fill="#86B896"/>
+        <ellipse cx="76" cy="26" rx="17" ry="12" fill="#fff"/>
+        <circle cx="68" cy="39.5" r="3.5" fill="#fff"/>
+        <circle cx="69.5" cy="45" r="2.5" fill="#fff"/>
+      </g>
+    </Base>
+  );
+}
+
+
+export function NaraIconCreativity(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Creativity: Sandy dengan warna-kulit hangat" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#FDF2E9"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 1.7) scale(.42)">
+        <defs><clipPath id="ic1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <g clipPath="url(#ic1)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
+          <ellipse cx="52" cy="118" rx="14" ry="7" fill="#F8E2C6" transform="rotate(-35 52 118)" opacity=".9"/>
+        </g>
+        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+        <path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <ellipse cx="55" cy="165" rx="5" ry="6" fill="#2F3B54"/>
+        <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
+        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
+        <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
+      </g>
+    </Base>
+  );
+}
+
+export function NaraIconMindfulness(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Mindfulness: Moss di meditasi" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#F0F4FF"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 1.7) scale(.42)">
+        <defs><clipPath id="im1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <g clipPath="url(#im1)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#74B7E0"/>
+          <path d="M62 142C62 124 72 108 84 94C78 112 76 128 80 146Z" fill="#B5E0F7"/>
+        </g>
+        <circle cx="72" cy="142" r="10.5" fill="#2F3B54"/>
+        <circle cx="75.7" cy="137.8" r="3.8" fill="#fff"/>
+        <circle cx="68.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
+        <circle cx="128" cy="142" r="10.5" fill="#2F3B54"/>
+        <circle cx="131.7" cy="137.8" r="3.8" fill="#fff"/>
+        <circle cx="124.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
+        <ellipse cx="62" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <ellipse cx="138" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <path d="M91 168Q100 177 109 168" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M68 156Q80 142 92 156" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M108 156Q120 142 132 156" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <ellipse cx="62" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <ellipse cx="138" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
+        <circle cx="80" cy="152" r="10.5" fill="#2F3B54"/>
+        <circle cx="83.7" cy="147.8" r="3.8" fill="#fff"/>
+        <circle cx="76.4" cy="156.4" r="1.8" fill="#fff" opacity=".8"/>
+      </g>
+    </Base>
+  );
+}
+
+export function NaraIconGrowth(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Growth: Sandy dengan panah naik" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#FDE68A"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 1.7) scale(.42)">
+        <defs><clipPath id="ig2"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <g clipPath="url(#ig2)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
+          <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
+          <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
+        </g>
+        <path d="M87 157Q100 179 113 157Z" fill="#2F3B54"/>
+        <ellipse cx="100" cy="168" rx="6" ry="3.4" fill="#F4A9BA"/>
+        <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
+        <path d="M172 148C166 160 142 174 120 170" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+      </g>
+      <path d="M112 144Q124 130 136 144" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M87 157Q100 179 113 157Z" fill="#2F3B54"/>
+      <ellipse cx="100" cy="168" rx="6" ry="3.4" fill="#F4A9BA"/>
+    </Base>
+  );
+}
+
+export function NaraIconEmotions(props: AssetProps) {
+  return (
+    <Base vb={[100, 100]} label="Ikon Emotions: Pip dengan ekspresi perasaan" {...props}>
+      <circle cx="50" cy="50" r="50" fill="#FDF2E9"/>
+      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
+      <g transform="translate(8 1.7) scale(.42)">
+        <defs><clipPath id="ie1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
+        <g clipPath="url(#ie1)">
+          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
+          <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
+          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
+          <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
+        </g>
+        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
+        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
+        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
+        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+        <path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
+      </g>
+    </Base>
+  );
+}
+

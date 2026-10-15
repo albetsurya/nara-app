@@ -34,7 +34,7 @@ interface PipProps {
  */
 export function Pip({ pose = "default", size = 120, className, motion: mode = "bob", companion = "Pip" }: PipProps) {
   const reduce = useReducedMotion();
-  const Face = companion === "Pip" ? POSES[pose] : COMPANIONS.find((c) => c.name === companion)!.Face;
+  const Face = companion === "Pip" ? POSES[pose] : COMPANIONS.find((c) => c.name === companion)?.Face ?? PipDefault;
   const still = reduce || mode === "none";
 
   return (
