@@ -15,9 +15,6 @@ function Base({ size = 120, vb, label, className, children, ...rest }: AssetProp
   );
 }
 
-/* Helper to apply dark mode fix class to specific assets */
-const darkFixClass = "svg-dark-fix";
-
 /* id clipPath statis per aset; aman dipakai berulang karena definisinya identik. */
 
 export function PipDefault(props: AssetProps) {
@@ -332,32 +329,10 @@ export function AnimatedShelly(props: AssetProps) {
   );
 }
 
-export function NaraPipTimer(props: AssetProps) {
+export function NaraMossJar(props: AssetProps) {
   return (
-    <Base vb={[200, 160]} label="Pip duduk di atas progress timer" {...props}>
-      <path d="M30 148A70 70 0 0 1 170 148" fill="none" stroke="#E2E8F0" strokeWidth="8" strokeLinecap="round" />
-      <path d="M30 148A70 70 0 0 1 100.00 78.00" fill="none" stroke="#6EE7B7" strokeWidth="8" strokeLinecap="round" />
-      <ellipse cx="100.0" cy="76.0" rx="22" ry="2.8" fill="#5B6B85" opacity=".16" transform="rotate(0.0 100.0 75.0)"/>
-      <defs><clipPath id="npt"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs>
-      <g transform="translate(100.00 75.00) rotate(0.00) scale(.4) translate(-100 -196)">
-        <path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/>
-        <path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/>
-        <path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/>
-        <path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/>
-        <g clipPath="url(#npt)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/>
-          <path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/>
-        </g>
-        <circle cx="76" cy="136" r="11" fill="#2F3B54"/>
-        <circle cx="79.8" cy="131.6" r="4.0" fill="#fff"/>
-        <circle cx="72.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/>
-        <circle cx="124" cy="136" r="11" fill="#2F3B54"/>
-        <circle cx="127.8" cy="131.6" r="4.0" fill="#fff"/>
-        <circle cx="120.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/>
-        <ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <path d="M91 151Q100 160 109 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </g>
+    <Base vb={[200, 220]} label="Moss memeluk toples syukur" {...props}>
+      <ellipse cx="100" cy="209" rx="62" ry="9" fill="#5B6B85" opacity=".09"/><ellipse cx="100" cy="209" rx="52.08" ry="6.8" fill="#5B6B85" opacity=".12"/><ellipse cx="100" cy="209" rx="39.68" ry="4.8" fill="#5B6B85" opacity=".16"/><defs><clipPath id="nmj"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#nmj)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><circle cx="72" cy="118" r="10.5" fill="#2F3B54"/><circle cx="75.7" cy="113.8" r="3.8" fill="#fff"/><circle cx="68.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/><circle cx="128" cy="118" r="10.5" fill="#2F3B54"/><circle cx="131.7" cy="113.8" r="3.8" fill="#fff"/><circle cx="124.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/><ellipse cx="52" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 133Q100 142 109 133" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/><circle cx="100" cy="176" r="34" fill="#FDE68A" opacity=".22"/><circle cx="100" cy="176" r="24" fill="#FDE68A" opacity=".18"/><path d="M82 150H118Q126 150 126 160V190Q126 200 116 200H84Q74 200 74 190V160Q74 150 82 150Z" fill="#E2E8F0" opacity=".7"/><path d="M78 160Q78 154 84 154H116Q122 154 122 160V190Q122 196 116 196H84Q78 196 78 190Z" fill="#94A3B8" opacity=".42"/><g transform="translate(82 180) scale(0.7)"><path d="M12 21C4 14 1 10 1 6.5C1 3 3.5 1 6.5 1C9 1 11 2.5 12 4.5C13 2.5 15 1 17.5 1C20.5 1 23 3 23 6.5C23 10 20 14 12 21Z" fill="#FDE68A"/></g><g transform="translate(103 170) scale(0.55)"><path d="M12 21C4 14 1 10 1 6.5C1 3 3.5 1 6.5 1C9 1 11 2.5 12 4.5C13 2.5 15 1 17.5 1C20.5 1 23 3 23 6.5C23 10 20 14 12 21Z" fill="#FDE68A"/></g><g transform="translate(106 187) scale(0.42)"><path d="M12 21C4 14 1 10 1 6.5C1 3 3.5 1 6.5 1C9 1 11 2.5 12 4.5C13 2.5 15 1 17.5 1C20.5 1 23 3 23 6.5C23 10 20 14 12 21Z" fill="#FDE68A"/></g><g transform="translate(88 158) rotate(-25)"><path d="M0 0C6 -3 13 1 13 8C7 11 0 7 0 0Z" fill="#FDE68A"/></g><rect x="80" y="157" width="5" height="30" rx="2.5" fill="#fff" opacity=".7"/><rect x="79" y="139" width="42" height="11" rx="4" fill="#6EE7B7"/><rect x="79" y="139" width="42" height="4" rx="2" fill="#A7F3D0" opacity=".8"/><path transform="translate(134 134) scale(0.9)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path transform="translate(66 142) scale(0.7)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path transform="translate(138 168) scale(0.55)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path d="M28 158C34 176 58 184 78 176" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/><path d="M172 158C166 176 142 184 122 176" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/>
     </Base>
   );
 }
@@ -365,34 +340,7 @@ export function NaraPipTimer(props: AssetProps) {
 export function NaraIconGratitude(props: AssetProps) {
   return (
     <Base vb={[100, 100]} label="Ikon Gratitude: Moss memeluk daun" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#FEF3C7"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 1.7) scale(.42)">
-        <defs><clipPath id="ig1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <g clipPath="url(#ig1)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/>
-          <ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/>
-        </g>
-        <circle cx="72" cy="118" r="10.5" fill="#2F3B54"/>
-        <circle cx="75.7" cy="113.8" r="3.8" fill="#fff"/>
-        <circle cx="68.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/>
-        <circle cx="128" cy="118" r="10.5" fill="#2F3B54"/>
-        <circle cx="131.7" cy="113.8" r="3.8" fill="#fff"/>
-        <circle cx="124.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/>
-        <ellipse cx="52" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <ellipse cx="148" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <path d="M91 133Q100 142 109 133" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/>
-        <circle cx="84" cy="76" r="5" fill="#86B896"/>
-        <circle cx="118" cy="80" r="4" fill="#86B896"/>
-        <circle cx="102" cy="68" r="3.5" fill="#86B896"/>
-        <g transform="translate(72 146)">
-          <path d="M0 0C28 -8 58 12 54 48C26 54 -4 32 0 0Z" fill="#6EE7B7"/>
-          <path d="M5 5C22 18 38 32 50 46" fill="none" stroke="#34D399" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-        </g>
-        <path d="M28 158C34 178 58 186 80 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/>
-        <path d="M172 158C166 178 142 186 120 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/>
-      </g>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(-5 -20) scale(.55)"><defs><clipPath id="ig1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#ig1)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><circle cx="72" cy="118" r="10.5" fill="#2F3B54"/><circle cx="75.7" cy="113.8" r="3.8" fill="#fff"/><circle cx="68.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/><circle cx="128" cy="118" r="10.5" fill="#2F3B54"/><circle cx="131.7" cy="113.8" r="3.8" fill="#fff"/><circle cx="124.4" cy="122.4" r="1.8" fill="#fff" opacity=".8"/><ellipse cx="52" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="132" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 133Q100 142 109 133" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/><g transform="translate(72 146)"><path d="M0 0C28 -8 58 12 54 48C26 54 -4 32 0 0Z" fill="#6EE7B7"/><path d="M5 5C22 18 38 32 50 46" fill="none" stroke="#34D399" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></g><path d="M28 158C34 178 58 186 80 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/><path d="M172 158C166 178 142 186 120 180" fill="none" stroke="#7AA388" strokeWidth="11" strokeLinecap="round"/></g>
     </Base>
   );
 }
@@ -400,172 +348,87 @@ export function NaraIconGratitude(props: AssetProps) {
 export function NaraIconReflection(props: AssetProps) {
   return (
     <Base vb={[100, 100]} label="Ikon Reflection: Moss dengan gelembung pikiran kosong" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#E2E8F0"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 13.4) scale(.36)">
-        <defs><clipPath id="ir1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <path d="M176 148C192 140 190 116 174 102" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="172" cy="100" r="6" fill="#2F3B54"/>
-        <path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/>
-        <g clipPath="url(#ir1)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/>
-          <ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/>
-        </g>
-        <circle cx="72" cy="142" r="10.5" fill="#2F3B54"/>
-        <circle cx="75.7" cy="137.8" r="3.8" fill="#fff"/>
-        <circle cx="68.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
-        <circle cx="128" cy="142" r="10.5" fill="#2F3B54"/>
-        <circle cx="131.7" cy="137.8" r="3.8" fill="#fff"/>
-        <circle cx="124.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
-        <ellipse cx="52" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <ellipse cx="148" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <path d="M91 158Q100 167 109 158" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/>
-        <circle cx="84" cy="76" r="5" fill="#86B896"/>
-        <circle cx="118" cy="80" r="4" fill="#86B896"/>
-        <circle cx="102" cy="68" r="3.5" fill="#86B896"/>
-        <ellipse cx="76" cy="26" rx="17" ry="12" fill="#fff"/>
-        <circle cx="68" cy="39.5" r="3.5" fill="#fff"/>
-        <circle cx="69.5" cy="45" r="2.5" fill="#fff"/>
-      </g>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(2 -4) scale(.48)"><defs><clipPath id="ir1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><path d="M176 148C192 140 190 116 174 102" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/><circle cx="172" cy="100" r="6" fill="#2F3B54"/><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#ir1)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><circle cx="72" cy="142" r="10.5" fill="#2F3B54"/><circle cx="75.7" cy="137.8" r="3.8" fill="#fff"/><circle cx="68.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/><circle cx="128" cy="142" r="10.5" fill="#2F3B54"/><circle cx="131.7" cy="137.8" r="3.8" fill="#fff"/><circle cx="124.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/><ellipse cx="52" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 158Q100 167 109 158" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/></g><ellipse cx="76" cy="13" rx="17" ry="11.5" fill="#E2E8F0"/><ellipse cx="76" cy="12" rx="15" ry="9.5" fill="#fff"/><circle cx="82" cy="29.5" r="3" fill="#E2E8F0"/><circle cx="84" cy="36.5" r="2.3" fill="#E2E8F0"/>
     </Base>
   );
 }
 
-
 export function NaraIconCreativity(props: AssetProps) {
   return (
-    <Base vb={[100, 100]} label="Ikon Creativity: Sandy dengan warna-kulit hangat" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#FDF2E9"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 1.7) scale(.42)">
-        <defs><clipPath id="ic1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <g clipPath="url(#ic1)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
-          <ellipse cx="52" cy="118" rx="14" ry="7" fill="#F8E2C6" transform="rotate(-35 52 118)" opacity=".9"/>
-        </g>
-        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-        <path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <ellipse cx="55" cy="165" rx="5" ry="6" fill="#2F3B54"/>
-        <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
-        <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
-        <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
-      </g>
+    <Base vb={[100, 100]} label="Ikon Creativity: Sandy memegang kuas" {...props}>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(-5 2) scale(.46)"><defs><clipPath id="ic1"><path d="M20 148C20 110 54 84 100 84C146 84 180 110 180 148C180 178 148 192 100 192C52 192 20 178 20 148Z"/></clipPath></defs><path d="M176 152C192 150 194 138 192 126" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/><path d="M20 148C20 110 54 84 100 84C146 84 180 110 180 148C180 178 148 192 100 192C52 192 20 178 20 148Z" fill="#F0CFA8"/><g clipPath="url(#ic1)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/><ellipse cx="52" cy="118" rx="14" ry="7" fill="#F8E2C6" transform="rotate(-35 52 118)" opacity=".9"/></g><circle cx="76" cy="140" r="11.5" fill="#2F3B54"/><circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/><circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/><circle cx="124" cy="140" r="11.5" fill="#2F3B54"/><circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/><circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/><ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/><ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/><path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/><ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/><circle cx="68" cy="76" r="6" fill="#FFD15C"/><g transform="translate(192 126) rotate(22)"><rect x="-4.5" y="-6" width="9" height="62" rx="4.5" fill="#E8B98E"/><rect x="-5.5" y="-14" width="11" height="10" rx="2" fill="#CBD5E1"/><path d="M-5.5 -14C-7 -30 -2 -40 0 -46C2 -40 7 -30 5.5 -14Z" fill="#FDA4AF"/></g><circle cx="192" cy="128" r="6" fill="#2F3B54"/></g>
     </Base>
   );
 }
 
 export function NaraIconMindfulness(props: AssetProps) {
   return (
-    <Base vb={[100, 100]} label="Ikon Mindfulness: Moss di meditasi" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#F0F4FF"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 1.7) scale(.42)">
-        <defs><clipPath id="im1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <g clipPath="url(#im1)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#74B7E0"/>
-          <path d="M62 142C62 124 72 108 84 94C78 112 76 128 80 146Z" fill="#B5E0F7"/>
-        </g>
-        <circle cx="72" cy="142" r="10.5" fill="#2F3B54"/>
-        <circle cx="75.7" cy="137.8" r="3.8" fill="#fff"/>
-        <circle cx="68.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
-        <circle cx="128" cy="142" r="10.5" fill="#2F3B54"/>
-        <circle cx="131.7" cy="137.8" r="3.8" fill="#fff"/>
-        <circle cx="124.4" cy="146.4" r="1.8" fill="#fff" opacity=".8"/>
-        <ellipse cx="62" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <ellipse cx="138" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <path d="M91 168Q100 177 109 168" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M68 156Q80 142 92 156" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M108 156Q120 142 132 156" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <ellipse cx="62" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <ellipse cx="138" cy="170" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/>
-        <circle cx="80" cy="152" r="10.5" fill="#2F3B54"/>
-        <circle cx="83.7" cy="147.8" r="3.8" fill="#fff"/>
-        <circle cx="76.4" cy="156.4" r="1.8" fill="#fff" opacity=".8"/>
-      </g>
+    <Base vb={[100, 100]} label="Ikon Mindfulness: Moss bermeditasi" {...props}>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(-8 -27.2) scale(.58)"><g transform="translate(10 6) scale(.9)"><defs><clipPath id="im1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><path d="M84 192C82 204 80 212 74 218" fill="none" stroke="#2F3B54" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/><path d="M116 192C118 204 120 212 126 218" fill="none" stroke="#2F3B54" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/><circle cx="74" cy="218" r="5" fill="#2F3B54"/><circle cx="126" cy="218" r="5" fill="#2F3B54"/><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#im1)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><path d="M61 120Q72 130 83 120" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M117 120Q128 130 139 120" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="52" cy="138" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="138" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M94 136Q100 139 106 136" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/><path d="M34 160C62 172 98 160 126 140" fill="none" stroke="#7AA388" strokeWidth="12" strokeLinecap="round"/><path d="M166 160C138 172 102 160 74 140" fill="none" stroke="#7AA388" strokeWidth="12" strokeLinecap="round"/><circle cx="126" cy="140" r="7.5" fill="#6B9479"/><circle cx="74" cy="140" r="7.5" fill="#6B9479"/></g></g>
     </Base>
   );
 }
 
 export function NaraIconGrowth(props: AssetProps) {
   return (
-    <Base vb={[100, 100]} label="Ikon Growth: Sandy dengan panah naik" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#FDE68A"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 1.7) scale(.42)">
-        <defs><clipPath id="ig2"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <g clipPath="url(#ig2)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
-          <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
-          <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
-        </g>
-        <path d="M87 157Q100 179 113 157Z" fill="#2F3B54"/>
-        <ellipse cx="100" cy="168" rx="6" ry="3.4" fill="#F4A9BA"/>
-        <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
-        <path d="M172 148C166 160 142 174 120 170" fill="none" stroke="#2F3B54" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-      </g>
-      <path d="M112 144Q124 130 136 144" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M87 157Q100 179 113 157Z" fill="#2F3B54"/>
-      <ellipse cx="100" cy="168" rx="6" ry="3.4" fill="#F4A9BA"/>
+    <Base vb={[100, 100]} label="Ikon Growth: Pip dengan tunas tinggi" {...props}>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(17 25.3) scale(.33)"><defs><clipPath id="ig2"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs><path d="M96 70C92 40 110 8 100 -36L107 -36C118 8 102 44 104 70Z" fill="#6FD0A8"/><path d="M99 24C78 28 58 16 52 -4C74 -8 94 0 99 24Z" fill="#8FE3C0"/><path d="M104 -4C108 -26 126 -38 146 -36C146 -16 128 -2 104 -4Z" fill="#7CDCB4"/><path d="M101 -34C92 -48 96 -62 104 -70C112 -58 110 -44 101 -34Z" fill="#A7F3D0"/><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/><g clipPath="url(#ig2)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/><path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/></g><circle cx="76" cy="136" r="11" fill="#2F3B54"/><circle cx="79.8" cy="131.6" r="4.0" fill="#fff"/><circle cx="72.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/><circle cx="124" cy="136" r="11" fill="#2F3B54"/><circle cx="127.8" cy="131.6" r="4.0" fill="#fff"/><circle cx="120.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/><ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 151Q100 160 109 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></g>
     </Base>
   );
 }
 
 export function NaraIconEmotions(props: AssetProps) {
   return (
-    <Base vb={[100, 100]} label="Ikon Emotions: Pip dengan ekspresi perasaan" {...props}>
-      <circle cx="50" cy="50" r="50" fill="#FDF2E9"/>
-      <ellipse cx="50" cy="86" rx="24" ry="3.4" fill="#5B6B85" opacity=".13"/>
-      <g transform="translate(8 1.7) scale(.42)">
-        <defs><clipPath id="ie1"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs>
-        <g clipPath="url(#ie1)">
-          <ellipse cx="108" cy="206" rx="96" ry="34" fill="#E0B98B"/>
-          <path d="M67 82C67 90 68 96 70 102L74 102C73 96 72 90 72 82Z" fill="#6FD0A8"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(0 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(60 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(120 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(180 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(240 68 76)"/>
-          <ellipse cx="68" cy="64" rx="5.5" ry="9.5" fill="#fff" transform="rotate(300 68 76)"/>
-          <circle cx="68" cy="76" r="6" fill="#FFD15C"/>
-        </g>
-        <circle cx="76" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="80.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="72.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-        <circle cx="124" cy="140" r="11.5" fill="#2F3B54"/>
-        <circle cx="128.0" cy="135.4" r="4.1" fill="#fff"/>
-        <circle cx="120.1" cy="144.8" r="2.0" fill="#fff" opacity=".8"/>
-        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-        <path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <ellipse cx="55" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-        <ellipse cx="145" cy="158" rx="10" ry="6.5" fill="#F7A8A0" opacity=".75"/>
-      </g>
+    <Base vb={[100, 100]} label="Ikon Emotions: Pip perasaan campur aduk" {...props}>
+      <ellipse cx="50" cy="92.5" rx="30" ry="3.4" fill="#5B6B85" opacity=".13"/><g transform="translate(3 -2.1) scale(.47)"><defs><clipPath id="ie1"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs><path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/><path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/><path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/><g clipPath="url(#ie1)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/><path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/></g><circle cx="76" cy="136" r="11" fill="#2F3B54"/><circle cx="79.8" cy="131.6" r="4.0" fill="#fff"/><circle cx="72.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/><path d="M64 125L88 116" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M76 150C76 150 71 157 71 160C71 163 73 165 76 165C79 165 81 163 81 160C81 157 76 150 76 150Z" fill="#BAE6FD"/><path d="M113 142Q124 128 135 142" fill="none" stroke="#2F3B54" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M88 157Q94 151 100 155T112 150" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></g>
     </Base>
   );
 }
 
+export function NaraPipTimer(props: AssetProps) {
+  return (
+    <Base vb={[200, 160]} label="Pip duduk di atas progress timer" {...props}>
+      <path d="M30 148A70 70 0 0 1 170 148" fill="none" stroke="#E2E8F0" strokeWidth="8" strokeLinecap="round"/><path d="M30 148A70 70 0 0 1 100.00 78.00" fill="none" stroke="#6EE7B7" strokeWidth="8" strokeLinecap="round"/><ellipse cx="100.0" cy="76.0" rx="22" ry="2.8" fill="#5B6B85" opacity=".16" transform="rotate(0.0 100.0 75.0)"/><defs><clipPath id="npt"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs><g transform="translate(100.00 75.00) rotate(0.00) scale(.4) translate(-100 -196)"><path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/><path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/><path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/><g clipPath="url(#npt)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/><path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/></g><circle cx="76" cy="136" r="11" fill="#2F3B54"/><circle cx="79.8" cy="131.6" r="4.0" fill="#fff"/><circle cx="72.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/><circle cx="124" cy="136" r="11" fill="#2F3B54"/><circle cx="127.8" cy="131.6" r="4.0" fill="#fff"/><circle cx="120.3" cy="140.6" r="1.9" fill="#fff" opacity=".8"/><ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 151Q100 160 109 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></g>
+    </Base>
+  );
+}
+
+export function NaraShellyQuiet(props: AssetProps) {
+  return (
+    <Base vb={[200, 220]} label="Shelly ungu transparan, pose 'shhh' (mode quiet thought aktif)" {...props}>
+      <defs><clipPath id="nsq"><path d="M30 150C30 108 60 76 100 76C142 76 172 106 170 148C168 180 140 196 100 196C60 196 30 182 30 150Z"/></clipPath></defs><ellipse cx="100" cy="209" rx="54" ry="9" fill="#5B6B85" opacity=".09"/><ellipse cx="100" cy="209" rx="45.36" ry="6.8" fill="#5B6B85" opacity=".12"/><ellipse cx="100" cy="209" rx="34.56" ry="4.8" fill="#5B6B85" opacity=".16"/><path d="M30 150C30 108 60 76 100 76C142 76 172 106 170 148C168 180 140 196 100 196C60 196 30 182 30 150Z" fill="#D9C7F0" opacity=".92"/><g clipPath="url(#nsq)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#C3AEE3"/><ellipse cx="100" cy="134" rx="58" ry="42" fill="#EADFF9" opacity=".55"/><ellipse cx="62" cy="104" rx="17" ry="8" fill="#fff" transform="rotate(-38 62 104)" opacity=".75"/><circle cx="138" cy="170" r="5" fill="#fff" opacity=".35"/><circle cx="68" cy="174" r="3.5" fill="#fff" opacity=".35"/><circle cx="122" cy="112" r="3" fill="#fff" opacity=".4"/></g><path d="M63 136Q74 146 85 136" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M115 136Q126 146 137 136" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="56" cy="154" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="144" cy="154" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><rect x="90" y="162" width="24" height="24" rx="11" fill="#B7A0DD"/><rect x="96.5" y="140" width="11" height="34" rx="5.5" fill="#B7A0DD"/><rect x="99.5" y="144" width="3" height="14" rx="1.5" fill="#EADFF9" opacity=".85"/><rect x="95" y="170" width="14" height="2.5" rx="1.25" fill="#A58DCF" opacity=".7"/><rect x="95" y="177" width="14" height="2.5" rx="1.25" fill="#A58DCF" opacity=".7"/><path transform="translate(150 92) scale(1)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".95"/><path transform="translate(54 86) scale(0.7)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".9"/><path transform="translate(158 132) scale(0.5)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".8"/>
+    </Base>
+  );
+}
+
+export function NaraShellyIdle(props: AssetProps) {
+  return (
+    <Base vb={[200, 220]} label="Shelly ungu transparan, kondisi biasa (mode quiet thought mati)" {...props}>
+      <defs><clipPath id="nsi"><path d="M30 150C30 108 60 76 100 76C142 76 172 106 170 148C168 180 140 196 100 196C60 196 30 182 30 150Z"/></clipPath></defs><ellipse cx="100" cy="209" rx="54" ry="9" fill="#5B6B85" opacity=".09"/><ellipse cx="100" cy="209" rx="45.36" ry="6.8" fill="#5B6B85" opacity=".12"/><ellipse cx="100" cy="209" rx="34.56" ry="4.8" fill="#5B6B85" opacity=".16"/><path d="M30 150C30 108 60 76 100 76C142 76 172 106 170 148C168 180 140 196 100 196C60 196 30 182 30 150Z" fill="#D9C7F0" opacity=".92"/><g clipPath="url(#nsi)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#C3AEE3"/><ellipse cx="100" cy="134" rx="58" ry="42" fill="#EADFF9" opacity=".55"/><ellipse cx="62" cy="104" rx="17" ry="8" fill="#fff" transform="rotate(-38 62 104)" opacity=".75"/><circle cx="138" cy="170" r="5" fill="#fff" opacity=".35"/><circle cx="68" cy="174" r="3.5" fill="#fff" opacity=".35"/><circle cx="122" cy="112" r="3" fill="#fff" opacity=".4"/></g><circle cx="74" cy="140" r="11" fill="#2F3B54"/><circle cx="77.8" cy="135.6" r="4.0" fill="#fff"/><circle cx="70.3" cy="144.6" r="1.9" fill="#fff" opacity=".8"/><circle cx="126" cy="140" r="11" fill="#2F3B54"/><circle cx="129.8" cy="135.6" r="4.0" fill="#fff"/><circle cx="122.3" cy="144.6" r="1.9" fill="#fff" opacity=".8"/><ellipse cx="56" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="144" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M91 160Q100 169 109 160" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path transform="translate(150 92) scale(1)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".95"/><path transform="translate(54 86) scale(0.7)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".9"/><path transform="translate(158 132) scale(0.5)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#fff" opacity=".8"/>
+    </Base>
+  );
+}
+
+export function NaraSleepPipMoon(props: AssetProps) {
+  return (
+    <Base vb={[280, 220]} label="Pip tidur meringkuk di atas bulan sabit" {...props}>
+      <ellipse cx="140" cy="206" rx="70" ry="8" fill="#5B6B85" opacity=".09"/><ellipse cx="140" cy="206" rx="58.8" ry="6" fill="#5B6B85" opacity=".12"/><ellipse cx="140" cy="206" rx="44.800000000000004" ry="4.2" fill="#5B6B85" opacity=".16"/><g transform="translate(0 28)"><defs><clipPath id="nsp"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs><g transform="translate(140 128) rotate(-4) scale(0.66 0.58) translate(-100 -196)"><path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/><path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/><path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/><g clipPath="url(#nsp)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/><path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/></g><path d="M65 134Q76 144 87 134" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M113 134Q124 144 135 134" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M94 151Q100 154 106 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></g><path d="M40 70C60 170 220 170 240 70C210 140 70 140 40 70Z" fill="#FDE68A"/></g><path transform="translate(44 40) scale(1.1)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path transform="translate(240 30) scale(0.8)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path transform="translate(256 96) scale(0.6)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FDE68A" opacity="1"/><path transform="translate(26 100) scale(0.6)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FEF3C7" opacity="1"/>
+    </Base>
+  );
+}
+
+export function NaraSleepMossLeaf(props: AssetProps) {
+  return (
+    <Base vb={[280, 220]} label="Moss tidur di dalam daun besar" {...props}>
+      <ellipse cx="140" cy="202" rx="92" ry="8" fill="#5B6B85" opacity=".09"/><ellipse cx="140" cy="202" rx="77.28" ry="6" fill="#5B6B85" opacity=".12"/><ellipse cx="140" cy="202" rx="58.88" ry="4.2" fill="#5B6B85" opacity=".16"/><path d="M14 120C56 84 224 84 266 120C226 178 54 178 14 120Z" fill="#52D6A8"/><defs><clipPath id="n2m"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><g transform="translate(140 156) rotate(0) scale(0.62 0.62) translate(-100 -196)"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#n2m)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><path d="M61 140Q72 150 83 140" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M117 140Q128 150 139 140" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="52" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M94 158Q100 161 106 158" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/></g><path d="M20 126C60 150 220 150 260 126C224 184 56 184 20 126Z" fill="#6EE7B7"/><path d="M30 130C80 156 200 156 250 130" fill="none" stroke="#A7F3D0" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/><path transform="translate(240 60) scale(0.8)" d="M0 -6L1.8 -1.8L6 0L1.8 1.8L0 6L-1.8 1.8L-6 0L-1.8 -1.8Z" fill="#FEF3C7" opacity="1"/>
+    </Base>
+  );
+}
+
+export function NaraSleepPipMoss(props: AssetProps) {
+  return (
+    <Base vb={[280, 220]} label="Pip dan Moss tidur bersebelahan dengan Zzz" {...props}>
+      <ellipse cx="143" cy="177" rx="104" ry="8" fill="#5B6B85" opacity=".09"/><ellipse cx="143" cy="177" rx="87.36" ry="6" fill="#5B6B85" opacity=".12"/><ellipse cx="143" cy="177" rx="66.56" ry="4.2" fill="#5B6B85" opacity=".16"/><defs><clipPath id="n3p"><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z"/></clipPath></defs><g transform="translate(100 172) rotate(6) scale(0.62 0.62) translate(-100 -196)"><path d="M97 68C97 54 98 44 100 32L104 32C103 44 103 56 103 68Z" fill="#6FD0A8"/><path d="M100 42C86 42 72 36 65 23C80 19 96 26 100 42Z" fill="#8FE3C0"/><path d="M102 36C104 21 118 13 135 15C135 30 120 40 102 36Z" fill="#7CDCB4"/><path d="M100 62C148 62 176 98 176 138C176 176 144 196 100 196C56 196 24 176 24 138C24 98 52 62 100 62Z" fill="#A9B9CE"/><g clipPath="url(#n3p)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#94A6BE"/><path d="M50 108C54 86 72 74 92 72C76 82 66 94 62 116Z" fill="#C6D2E2"/></g><path d="M65 134Q76 144 87 134" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M113 134Q124 144 135 134" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="57" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="143" cy="153" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M94 151Q100 154 106 151" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/></g><defs><clipPath id="n3m"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z"/></clipPath></defs><g transform="translate(186 172) rotate(-6) scale(0.62 0.62) translate(-100 -196)"><path d="M22 150C22 104 52 70 100 70C148 70 178 104 178 150C178 180 148 196 100 196C52 196 22 180 22 150Z" fill="#8FB59C"/><g clipPath="url(#n3m)"><ellipse cx="108" cy="206" rx="96" ry="34" fill="#7AA388"/><ellipse cx="52" cy="150" rx="13" ry="7" fill="#AECDB8" transform="rotate(-40 52 150)" opacity=".85"/></g><path d="M61 140Q72 150 83 140" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M117 140Q128 150 139 140" fill="none" stroke="#2F3B54" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><ellipse cx="52" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><ellipse cx="148" cy="158" rx="10" ry="6.5" fill="#F4A9BA" opacity=".75"/><path d="M94 158Q100 161 106 158" fill="none" stroke="#2F3B54" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M54 94C42 86 48 70 62 72C64 62 78 58 86 66C92 56 108 56 114 66C124 60 138 66 138 76C152 76 156 92 146 98C130 106 70 106 54 94Z" fill="#6FA37F"/><circle cx="84" cy="76" r="5" fill="#86B896"/><circle cx="118" cy="80" r="4" fill="#86B896"/><circle cx="102" cy="68" r="3.5" fill="#86B896"/></g><path d="M146 50H162L146 70H162" fill="none" stroke="#94A3B8" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/><path d="M168 28H180L168 44H180" fill="none" stroke="#94A3B8" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M186 8H194L186 18H194" fill="none" stroke="#94A3B8" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </Base>
+  );
+}
