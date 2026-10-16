@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
@@ -18,13 +18,10 @@ export function TemplateSelector({ onSelect, initialTemplate = "free" }: Templat
   const [selectedId, setSelectedId] = useState(initialTemplate);
   const [showPicker, setShowPicker] = useState(false);
 
-  const template = getTemplate(selectedId);
-
-  useEffect(() => {
-    if (initialTemplate) setSelectedId(initialTemplate);
-  }, [initialTemplate]);
-
-  // Type-safe access to translations
+  // Use useMemo to ensure template values react to language changes
+  const template = useMemo(() => getTemplate(selectedId), [selectedId]);
+  
+  // Translation helpers that re-run when `t` changes
   const getTemplateName = (id: string) => t.templates?.[id as keyof typeof t.templates]?.name ?? id;
   const getTemplateDesc = (id: string) => t.templates?.[id as keyof typeof t.templates]?.desc ?? "";
   const getPickerTitle = () => t.journal?.templatePicker ?? "Choose a template";

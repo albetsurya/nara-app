@@ -63,18 +63,26 @@
 .dark .btn-google, .dark .btn-google:hover { background-color: #ffffff; color: #1f293b; border-color: #e4e4e7; }
 .dark button.hover\:bg-stone-100:hover { background-color: rgb(51 65 85); }
 
-/* TipTap rich editor */
-.tiptap { @apply min-h-[120px] py-2 font-sans text-[15px] font-normal leading-relaxed text-pine dark:text-slate-100; }
+/* Tiptap rich editor improvement */
+.tiptap { 
+  min-height: 200px; 
+  padding: 1rem 0; 
+  font-family: var(--font-body); 
+  font-size: 16px; 
+  line-height: 1.8; 
+  color: #2F3B54; 
+}
+.dark .tiptap { color: #E2E8F0; }
 .tiptap:focus { outline: none; }
-.tiptap p { @apply my-0 mb-2 last:mb-0; }
-.tiptap ul { @apply my-2 list-disc pl-6; }
-.tiptap ol { @apply my-2 list-decimal pl-6; }
-.tiptap li p { @apply mb-1; }
-.tiptap blockquote { @apply my-2 border-l-2 border-pine/30 pl-3 italic text-stone-600 dark:border-slate-500 dark:text-slate-300; }
-.tiptap h3 { @apply mb-1 mt-2 font-display text-[16px] font-bold text-pine dark:text-slate-100; }
-.tiptap strong { @apply font-bold; }
-.tiptap p.is-editor-empty:first-child::before { content: attr(data-placeholder); @apply float-left h-0 pointer-events-none font-normal text-stone-300 dark:text-slate-600; }
-.tiptap-readonly { @apply min-h-0 py-0; }
+.tiptap p.is-editor-empty:first-child::before { 
+  content: attr(data-placeholder); 
+  float: left; 
+  height: 0; 
+  pointer-events: none; 
+  font-style: italic;
+  color: #A8A29E; 
+}
+.dark .tiptap p.is-editor-empty:first-child::before { color: #64748B; }
 /* Focus Mode: give the editor room to breathe when page chrome is hidden. */
 .focus-writing .tiptap { min-height: 42dvh; }
 
