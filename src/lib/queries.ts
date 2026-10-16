@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Journal, Profile, Stamp } from "./types";
+import { decryptMaybe } from "./vaultCrypto";
 
 /** One place for query keys + fetchers, shared by server prefetching and client hooks. */
 export const keys = {
@@ -21,7 +22,9 @@ export async function fetchProfile(sb: SupabaseClient): Promise<Profile | null> 
 export async function fetchRecentJournals(sb: SupabaseClient): Promise<Journal[]> {
   const { data, error } = await sb.from("journals").select("*").order("created_at", { ascending: false }).limit(30);
   if (error) throw error;
-  return data ?? [];
+  const rows = (data ?? []) as Journal[];
+  // Vault rows decrypt here (client session only); locked screens never get this far.
+  return Promise.all(rows.map(async (j) => ({ ...j, content: await decryptMaybe(j.content) })));
 }
 
 /** Server-side pagination: only the requested range leaves the database. */

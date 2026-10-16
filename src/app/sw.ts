@@ -28,3 +28,18 @@ const serwist = new Serwist({
 });
 
 serwist.addEventListeners();
+
+// Background Sync: when the OS wakes us after a reconnect, nudge the open
+// tabs to flush the journal queue. The queue itself lives in localStorage,
+// which a worker cannot read — so the tab does the actual syncing.
+self.addEventListener("sync", (event) => {
+  const e = event as unknown as { tag: string; waitUntil: (p: Promise<unknown>) => void };
+  if (e.tag !== "nara-flush") return;
+  e.waitUntil(
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((list) => {
+        list.forEach((c) => c.postMessage({ type: "nara-flush" }));
+      }),
+  );
+});

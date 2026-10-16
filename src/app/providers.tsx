@@ -24,9 +24,29 @@ export function Providers({ children }: { children: ReactNode }) {
       const sent = await flushQueue(createClient());
       if (sent) { client.invalidateQueries({ queryKey: ["journals"] }); client.invalidateQueries({ queryKey: ["stamps"] }); }
     };
+    const onMessage = (e: MessageEvent) => {
+      if ((e.data as { type?: string } | null)?.type === "nara-flush") sync();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") sync();
+    };
     sync();
     window.addEventListener("online", sync);
-    return () => window.removeEventListener("online", sync);
+    document.addEventListener("visibilitychange", onVisible);
+    try {
+      navigator.serviceWorker?.addEventListener("message", onMessage);
+    } catch {
+      // service worker unsupported — online/visibility flush still applies
+    }
+    return () => {
+      window.removeEventListener("online", sync);
+      document.removeEventListener("visibilitychange", onVisible);
+      try {
+        navigator.serviceWorker?.removeEventListener("message", onMessage);
+      } catch {
+        // ignore
+      }
+    };
   }, [client]);
 
   return (

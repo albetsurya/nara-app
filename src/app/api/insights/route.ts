@@ -32,23 +32,31 @@ export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const locale = body?.locale === "id" ? "id" : "en";
 
+  // Client-supplied digest (already decrypted on-device) keeps vault rows
+  // readable to the model without the server ever seeing the PIN.
+  const provided =
+    typeof body?.digest === "string" && body.digest.trim() ? body.digest.slice(0, 6000) : null;
+
+  let digest = provided;
+  if (!digest) {
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - 14);
+    const { data: journals } = await sb
+      .from("journals")
+      .select("content, mood, created_at")
+      .order("created_at", { ascending: false })
+      .limit(30);
+
+    const recent = (journals ?? []).filter((j) => new Date(j.created_at) >= cutoff);
+    if (recent.length < 3) return NextResponse.json({ insight: null });
+
+    digest = recent
+      .map((j) => `- [${j.created_at.slice(0, 10)} · ${j.mood}] ${j.content.replace(/<[^>]*>/g, " ").slice(0, 280)}`)
+      .join("\n");
+  }
+
   const key = process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY;
-  if (!key) return NextResponse.json({ insight: null });
-
-  const cutoff = new Date();
-  cutoff.setDate(cutoff.getDate() - 14);
-  const { data: journals } = await sb
-    .from("journals")
-    .select("content, mood, created_at")
-    .order("created_at", { ascending: false })
-    .limit(30);
-
-  const recent = (journals ?? []).filter((j) => new Date(j.created_at) >= cutoff);
-  if (recent.length < 3) return NextResponse.json({ insight: null });
-
-  const digest = recent
-    .map((j) => `- [${j.created_at.slice(0, 10)} · ${j.mood}] ${j.content.replace(/<[^>]*>/g, " ").slice(0, 280)}`)
-    .join("\n");
+  if (!key || !digest) return NextResponse.json({ insight: null });
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {

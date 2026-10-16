@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   appleWebApp: { capable: true, title: "Nara", statusBarStyle: "default" },
   icons: { icon: "/icons/icon.svg", apple: "/icons/icon-192.png" },
+  openGraph: {
+    title: "Nara",
+    description: "A quiet place for your notes. Small time, big feelings.",
+    type: "website",
+  },
+  twitter: { card: "summary", title: "Nara", description: "A quiet place for your notes." },
 };
 
 export const viewport: Viewport = {

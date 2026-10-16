@@ -8,6 +8,7 @@ import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 import { Pip } from "@/components/pip/Pip";
 import { useLang } from "@/lib/i18n";
 import { buzzLight } from "@/lib/haptics";
+import { stripHtml } from "@/lib/html";
 import { useRecentJournals } from "@/hooks/useJournal";
 
 const KEY = "nara:insights";
@@ -41,10 +42,21 @@ export function InsightsCard() {
 
   const reflect = useMutation({
     mutationFn: async () => {
+      // Digest is built from already-decrypted rows so vault content stays readable.
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 14);
+      const digest = entries
+        .filter((e) => new Date(e.created_at) >= cutoff)
+        .slice(0, 30)
+        .map(
+          (j) =>
+            `- [${j.created_at.slice(0, 10)} · ${j.mood}] ${stripHtml(j.content).replace(/\s+/g, " ").slice(0, 280)}`,
+        )
+        .join("\n");
       const res = await fetch("/api/insights", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ locale }),
+        body: JSON.stringify({ locale, digest }),
       });
       if (!res.ok) throw new Error("insights failed");
       return (await res.json()).insight as string | null;

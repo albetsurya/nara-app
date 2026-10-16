@@ -6,14 +6,16 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Pip } from "@/components/pip/Pip";
-import { useProfile } from "@/hooks/useJournal";
+import { useProfile, useRecentJournals } from "@/hooks/useJournal";
 import { useLang } from "@/lib/i18n";
+import { stripHtml } from "@/lib/html";
 import { buzzLight } from "@/lib/haptics";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 export default function ChatPage() {
   const { data: profile } = useProfile();
+  const { data: entries = [] } = useRecentJournals();
   const { t, fmt, locale } = useLang();
   const name = profile?.companion_name ?? "Pip";
   const [messages, setMessages] = useState<Msg[]>([{ role: "assistant", content: t.chat.hello }]);
@@ -34,6 +36,11 @@ export default function ChatPage() {
           messages: history.slice(1),
           locale,
           username: profile?.username ?? null,
+          // Decrypted client-side context; keeps the server blind to vault rows.
+          context: entries
+            .slice(0, 3)
+            .map((j) => `- (${j.mood}) ${stripHtml(j.content).slice(0, 400)}`)
+            .join("\n"),
         }),
       });
       if (!res.ok) throw new Error("chat failed");

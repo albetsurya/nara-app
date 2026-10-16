@@ -1,5 +1,6 @@
 import { BottomNav } from "@/components/ui/BottomNav";
 import { OfflineBar } from "@/components/ui/OfflineBar";
+import { LockGate } from "@/components/ui/LockGate";
 
 /** Shell for signed-in screens: offline status + scrollable content + floating bottom nav. */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -10,6 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </div>
       {children}
       <BottomNav />
+      <LockGate />
     </div>
   );
 }

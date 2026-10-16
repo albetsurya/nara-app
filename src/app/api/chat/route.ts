@@ -49,15 +49,24 @@ export async function POST(req: Request) {
   const username = typeof body?.username === "string" && body.username.trim() ? body.username.trim().slice(0, 30) : null;
   const fallback = FALLBACK[locale];
 
+  // Client-supplied context (already decrypted on-device) keeps vault rows
+  // readable to the model without the server ever seeing the PIN.
+  const provided =
+    typeof body?.context === "string" && body.context.trim() ? body.context.slice(0, 2000) : null;
+
   const key = process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY;
   if (!key) return NextResponse.json({ reply: fallback });
 
   // RLS scopes this to the signed-in person's own entries
-  const [{ data: journals }, { data: profile }] = await Promise.all([
-    sb.from("journals").select("content, mood, created_at").order("created_at", { ascending: false }).limit(3),
-    sb.from("profiles").select("companion_name").maybeSingle(),
-  ]);
-  const recent = (journals ?? []).map((j) => `- (${j.mood}) ${j.content.slice(0, 400)}`).join("\n");
+  const { data: profile } = await sb.from("profiles").select("companion_name").maybeSingle();
+  const recent =
+    provided ??
+    (
+      await sb.from("journals").select("content, mood, created_at").order("created_at", { ascending: false }).limit(3)
+    ).data
+      ?.map((j) => `- (${j.mood}) ${j.content.slice(0, 400)}`)
+      .join("\n") ??
+    "";
   const userLine = username
     ? locale === "id"
       ? `Nama orang ini ${username}. Sesekali sapalah dengan namanya agar terasa personal, tapi jangan di setiap kalimat.`

@@ -55,6 +55,17 @@ export default function Onboarding() {
     setStep(n);
   };
 
+  /** Swipe the companion card sideways to meet the others. */
+  const swipeCompanion = (dx: number) => {
+    if (dx < -70) {
+      buzzLight();
+      setCompanionIdx((i) => (i + 1) % COMPANIONS.length);
+    } else if (dx > 70) {
+      buzzLight();
+      setCompanionIdx((i) => (i - 1 + COMPANIONS.length) % COMPANIONS.length);
+    }
+  };
+
   const toggleIntent = (id: string) => {
     buzzLight();
     setSelectedIntents((prev) =>
@@ -236,21 +247,36 @@ export default function Onboarding() {
                   const copy = ob.companions[companionIdx];
                   return (
                     <div className="mt-3 flex flex-col items-center">
-                      <div
-                        className={`flex w-full flex-col items-center px-5 pb-5 pt-4 text-center shadow-sm rounded-3xl border border-stone-200/50 ${comp.bg}`}
+                      <motion.div
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        dragElastic={0.45}
+                        whileDrag={{ scale: 0.97 }}
+                        onDragEnd={(_, info) => swipeCompanion(info.offset.x)}
+                        style={{ touchAction: "pan-y" }}
+                        className={`flex w-full cursor-grab flex-col items-center px-5 pb-5 pt-4 text-center shadow-sm rounded-3xl border border-stone-200/50 active:cursor-grabbing ${comp.bg}`}
                       >
                         <span className="rounded-full border border-stone-700/30 px-3 py-1 font-display text-[10px] font-bold tracking-[0.14em] on-tint-soft">
                           {copy.tag}
                         </span>
 
-                        <span className="grid h-[148px] w-[160px] place-items-center overflow-hidden">
-                          <Char size={132} />
-                        </span>
+                        <AnimatePresence mode="wait">
+                          <motion.span
+                            key={comp.name}
+                            initial={{ opacity: 0, x: 48 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -48 }}
+                            transition={{ duration: 0.2, ease: "easeOut" }}
+                            className="grid h-[148px] w-[160px] place-items-center overflow-hidden"
+                          >
+                            <Char size={132} />
+                          </motion.span>
+                        </AnimatePresence>
 
                         <p className="max-w-[240px] font-display text-sm font-bold leading-relaxed on-tint">
                           {copy.quote}
                         </p>
-                      </div>
+                      </motion.div>
 
                       <div className="mt-2.5 text-center">
                         <p className="font-display text-lg font-bold text-pine">{comp.name}</p>
@@ -272,6 +298,7 @@ export default function Onboarding() {
                           />
                         ))}
                       </div>
+                      <p className="mt-1.5 font-sans text-[11px] text-stone-400">{ob.swipeHint}</p>
                     </div>
                   );
                 })()}

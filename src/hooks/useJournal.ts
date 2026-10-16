@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createClient } from "@/lib/supabase/client";
 import { enqueue } from "@/lib/offlineQueue";
 import { fetchProfile, fetchRecentJournals, keys } from "@/lib/queries";
+import { decryptMaybe, encryptWithSession } from "@/lib/vaultCrypto";
 import type { Journal, NewJournal } from "@/lib/types";
 
 export const useRecentJournals = () => {
@@ -23,7 +24,8 @@ export const useJournalEntry = (id: string) => {
     queryFn: async () => {
       const { data, error } = await sb.from("journals").select("*").eq("id", id).maybeSingle();
       if (error) throw error;
-      return (data ?? null) as Journal | null;
+      if (!data) return null;
+      return { ...(data as Journal), content: await decryptMaybe((data as Journal).content) };
     },
   });
 };
@@ -50,11 +52,13 @@ export function useSaveJournal() {
 
   return useMutation({
     mutationFn: async (entry: NewJournal): Promise<{ queued: boolean }> => {
-      if (!navigator.onLine) { enqueue(entry); return { queued: true }; }
-      const { error } = await sb.from("journals").insert(entry);
+      // Vault on: ciphertext leaves the device; locked state fails loudly instead of leaking.
+      const payload = { ...entry, content: await encryptWithSession(entry.content) };
+      if (!navigator.onLine) { enqueue(payload); return { queued: true }; }
+      const { error } = await sb.from("journals").insert(payload);
       if (error) {
         // Network-level failures surface as fetch errors; keep the writing safe.
-        if (error.message?.toLowerCase().includes("fetch")) { enqueue(entry); return { queued: true }; }
+        if (error.message?.toLowerCase().includes("fetch")) { enqueue(payload); return { queued: true }; }
         throw error;
       }
       return { queued: false };
