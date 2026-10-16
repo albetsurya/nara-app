@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
+import { NaraIconGratitude } from "@/components/pip/PipAssets";
 
 export interface DailyPrompt {
   id: string;
@@ -97,7 +98,9 @@ export function DailyPromptBanner() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start gap-3">
-          <span className="mt-1 text-2xl" role="img" aria-hidden>💡</span>
+          <p className="mt-1 text-2xl" role="img" aria-hidden>
+            <NaraIconGratitude size={24} />
+          </p>
           <div className="flex-1">
             <p className="font-display text-[13px] font-bold text-amber-900">
               {getDailyTitle()}

@@ -38,7 +38,9 @@ export function TemplateSelector({ onSelect, initialTemplate = "free" }: Templat
         }}
         className="w-full flex items-center gap-3 rounded-2xl border border-stone-200/70 bg-white px-4 py-3 shadow-sm transition hover:border-stone-300"
       >
-        <span className="text-2xl" role="img" aria-hidden>{template?.icon}</span>
+        <span className="text-2xl" role="img" aria-hidden>
+          {template && <template.Icon size={24} />}
+        </span>
         <div className="flex-1 text-left">
           <p className="font-display text-[15px] font-bold text-pine">
             {getTemplateName(selectedId)}
@@ -103,7 +105,9 @@ export function TemplateSelector({ onSelect, initialTemplate = "free" }: Templat
                           : "border-stone-200/70 bg-white hover:border-stone-300"
                       }`}
                     >
-                      <span className="text-3xl" role="img" aria-hidden>{tmpl.icon}</span>
+                      <span className="text-3xl" role="img" aria-hidden>
+                        <tmpl.Icon size={32} />
+                      </span>
                       <p className="font-display text-[14px] font-bold text-pine text-center">
                         {getTemplateName(tmpl.id)}
                       </p>

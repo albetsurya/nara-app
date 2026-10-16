@@ -2,11 +2,22 @@
 
 import { useLang } from "@/lib/i18n";
 
+import type { ComponentType } from "react";
+import {
+  NaraIconCreativity,
+  NaraIconGratitude,
+  NaraIconReflection,
+  NaraIconMindfulness,
+  NaraIconEmotions,
+  NaraIconGrowth,
+  type AssetProps,
+} from "@/components/pip/PipAssets";
+
 export interface EntryTemplate {
   id: string;
   nameKey: string;
   descriptionKey: string;
-  icon: string;
+  Icon: ComponentType<AssetProps>;
   structure: string; // Template with placeholders
   placeholder: string;
 }
@@ -16,7 +27,7 @@ export const ENTRY_TEMPLATES: EntryTemplate[] = [
     id: "free",
     nameKey: "templates.free.name",
     descriptionKey: "templates.free.desc",
-    icon: "✍️",
+    Icon: NaraIconCreativity,
     structure: "",
     placeholder: "Write freely...",
   },
@@ -24,12 +35,11 @@ export const ENTRY_TEMPLATES: EntryTemplate[] = [
     id: "gratitude",
     nameKey: "templates.gratitude.name",
     descriptionKey: "templates.gratitude.desc",
-    icon: "🌿",
+    Icon: NaraIconGratitude,
     structure: `Things I'm grateful for today:
 1. 
 2. 
 3. 
-
 Why they matter:
 `,
     placeholder: "Start with gratitude...",
@@ -38,7 +48,7 @@ Why they matter:
     id: "reflection",
     nameKey: "templates.reflection.name",
     descriptionKey: "templates.reflection.desc",
-    icon: "🪞",
+    Icon: NaraIconReflection,
     structure: `What happened today:
 
 How I felt:
@@ -53,7 +63,7 @@ Tomorrow I want to:
     id: "planning",
     nameKey: "templates.planning.name",
     descriptionKey: "templates.planning.desc",
-    icon: "🗓️",
+    Icon: NaraIconMindfulness,
     structure: `Top 3 priorities for tomorrow:
 1. 
 2. 
@@ -70,7 +80,7 @@ One thing to look forward to:
     id: "emotions",
     nameKey: "templates.emotions.name",
     descriptionKey: "templates.emotions.desc",
-    icon: "💭",
+    Icon: NaraIconEmotions,
     structure: `Right now I'm feeling:
 
 What triggered this:
@@ -85,7 +95,7 @@ A kind note to myself:
     id: "wins",
     nameKey: "templates.wins.name",
     descriptionKey: "templates.wins.desc",
-    icon: "✨",
+    Icon: NaraIconGrowth,
     structure: `Today's wins (big or small):
 1. 
 2. 
@@ -108,6 +118,6 @@ export function getTemplateNames(t: ReturnType<typeof useLang>["t"]) {
     id: template.id,
     name: t[template.nameKey as keyof typeof t] ?? template.id,
     description: t[template.descriptionKey as keyof typeof t] ?? "",
-    icon: template.icon,
+    Icon: template.Icon,
   }));
 }
