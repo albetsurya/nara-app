@@ -97,10 +97,10 @@ export function DailyPromptBanner() {
         className="w-full rounded-2xl border border-amber-200/60 bg-[#FFFDF5] px-4 py-4 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start gap-3">
-          <p className="mt-1 text-2xl" role="img" aria-hidden>
-            <NaraIconGratitude size={24} />
-          </p>
+        <div className="flex items-start gap-3.5">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-100/70 p-1">
+            <NaraIconGratitude size={34} />
+          </span>
           <div className="flex-1">
             <p className="font-display text-[13px] font-bold text-amber-900">
               {getDailyTitle()}
